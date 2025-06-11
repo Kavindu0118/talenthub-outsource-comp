@@ -11,7 +11,7 @@ const Hero = () => {
         <h1 className="hero-title">
           Find <span className="gradient-text">World-Class</span> Talent
           <br />
-          Effortlessly  change by isuru
+          Effortlessly  change by Kavindu
         </h1>
         <p className="hero-subtitle">
           Connect with rigorously vetted professionals who are ready to transform your business. 
