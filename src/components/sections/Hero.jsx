@@ -33,28 +33,7 @@ const Hero = () => {
           </Link>
         </div>
 
-        {/* Stats */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(3, 1fr)', 
-          gap: '2rem',
-          marginTop: '3rem',
-          paddingTop: '2rem',
-          borderTop: '1px solid rgba(100, 116, 139, 0.3)'
-        }}>
-          <div className="text-center">
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.5rem' }}>500+</div>
-            <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Vetted Professionals</div>
-          </div>
-          <div className="text-center">
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.5rem' }}>98%</div>
-            <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Success Rate</div>
-          </div>
-          <div className="text-center">
-            <div style={{ fontSize: '2rem', fontWeight: '700', color: '#1e293b', marginBottom: '0.5rem' }}>24h</div>
-            <div style={{ fontSize: '0.875rem', color: '#64748b' }}>Average Response</div>
-          </div>
-        </div>
+
       </div>
     </section>
   );

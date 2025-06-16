@@ -198,7 +198,7 @@ const RoleCards = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA
         <div className="role-cta">
           <h3 className="role-cta-title">
             Don't See Your Role?
@@ -215,7 +215,7 @@ const RoleCards = () => {
               View All Opportunities
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
