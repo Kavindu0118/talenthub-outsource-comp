@@ -204,7 +204,7 @@ const HowWeHire = () => {
                     <div className="step-number">
                       {step.step}
                     </div>
-                    <div className="step-icon">{step.icon}</div>
+              
                   </div>
                   <div className="vetting-step-content">
                     <h3 className="vetting-step-title">
@@ -213,7 +213,11 @@ const HowWeHire = () => {
                     <p className="vetting-step-description">
                       {step.description}
                     </p>
-                    <ul className="vetting-details">
+                   
+                  </div>
+                  
+                </div>
+                 <ul className="vetting-details">
                       {step.details.map((detail, detailIndex) => (
                         <li key={detailIndex} className="vetting-detail-item">
                           <div className="detail-bullet"></div>
@@ -221,8 +225,6 @@ const HowWeHire = () => {
                         </li>
                       ))}
                     </ul>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
