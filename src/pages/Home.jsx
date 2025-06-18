@@ -2,28 +2,28 @@ import React from 'react';
 import Hero from '../components/sections/Hero';
 import ProcessSteps from '../components/sections/ProcessSteps';
 import RoleCards from '../components/sections/RoleCards';
-import { CheckCircleIcon, UserGroupIcon, ClockIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
+import { CheckCircleIcon, UserGroupIcon, ClockIcon, ShieldCheckIcon, CodeBracketIcon, DevicePhoneMobileIcon, GlobeAltIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import Button from '../components/common/Button';
 
 const Home = () => {
   const benefits = [
     {
-      icon: <CheckCircleIcon className="h-8 w-8" />,
+      icon: <CheckCircleIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Pre-Vetted Talent',
       description: 'Every professional in our network has been thoroughly screened and tested'
     },
     {
-      icon: <ClockIcon className="h-8 w-8" />,
+      icon: <ClockIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Fast Matching',
       description: 'Get matched with the right talent in as little as 24 hours'
     },
     {
-      icon: <ShieldCheckIcon className="h-8 w-8" />,
+      icon: <ShieldCheckIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Quality Guarantee',
       description: 'We stand behind our talent with a satisfaction guarantee'
     },
     {
-      icon: <UserGroupIcon className="h-8 w-8" />,
+      icon: <UserGroupIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Ongoing Support',
       description: 'Dedicated account management throughout your project'
     }
@@ -36,6 +36,29 @@ const Home = () => {
     { number: '95%', label: 'Client Satisfaction' },
     { number: '48hrs', label: 'Average Match Time' },
     { number: '50+', label: 'Countries Served' }
+  ];
+
+  const softwareServices = [
+    {
+      icon: <CodeBracketIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Web Development',
+      description: 'Full-stack web applications built with modern technologies and best practices'
+    },
+    {
+      icon: <DevicePhoneMobileIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Mobile Apps',
+      description: 'Native and cross-platform mobile applications for iOS and Android'
+    },
+    {
+      icon: <GlobeAltIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'E-commerce Solutions',
+      description: 'Complete e-commerce platforms with payment integration and inventory management'
+    },
+    {
+      icon: <ChartBarIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Business Software',
+      description: 'Custom business applications, CRM systems, and enterprise solutions'
+    }
   ];
 
   return (
@@ -85,21 +108,61 @@ const Home = () => {
       <ProcessSteps />
 
       {/* Roles Section */}
-      <section className="benefits-section">
+      <section className="benefits-section-reduced-top">
         <div className="benefits-container">
-          <div className="benefits-header">
+          {/* <div className="benefits-header">
             <h2 className="benefits-title">
               Popular Roles We Fill
             </h2>
             <p className="benefits-description">
               From technical experts to creative professionals, find the right talent for any role
             </p>
-          </div>
+          </div> */}
           <RoleCards />
         </div>
       </section>
 
+      {/* Software Solutions Section */}
+      <section className="software-section section-padding section-bg-gray">
+        <div className="container">
+          <div className="section-header section-header-center">
+            <h2 className="section-title">
+              Need Custom Software for Your Business?
+            </h2>
+            <p className="section-description">
+              Beyond talent outsourcing, we deliver end-to-end software solutions tailored to your unique business needs
+            </p>
+          </div>
 
+          <div className="benefits-grid">
+            {softwareServices.map((service, index) => (
+              <div key={index} className="benefit-card">
+                <div className="benefit-icon">{service.icon}</div>
+                <h3 className="benefit-title">{service.title}</h3>
+                <p className="benefit-description">{service.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={{
+            marginTop: '4rem', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            width: '100%'
+          }}>
+            <Button 
+              variant="primary" 
+              size="lg" 
+              className="btn-primary"
+              href="/solutions"
+              style={{ backgroundColor: '#3b82f6', color: 'white' }}
+            >
+              Start Your Project
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="cta-section">

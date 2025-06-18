@@ -233,20 +233,13 @@ const OurRoles = () => {
       {/* Featured Roles */}
       <section className="section-padding bg-gray-50">
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">
-              Most Popular Roles
-            </h2>
-            <p className="section-description">
-              These are the roles most frequently requested by our clients
-            </p>
-          </div>
+         
           <RoleCards />
         </div>
       </section>
 
       {/* Hiring Process */}
-      <section className="section-padding">
+      <section className="section-padding section-bg-blue">
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">
@@ -304,27 +297,102 @@ const OurRoles = () => {
               Transparent Pricing
             </h2>
             <p className="section-description">
-              No hidden fees, no surprises. You pay the talent's rate plus a small platform fee.
+              No hidden fees, no surprises. Simple, transparent pricing that scales with your needs.
             </p>
             
-            <div className="pricing-box">
-              <div className="pricing-grid">
-                <div className="pricing-item">
-                  <h3>Talent Rate</h3>
-                  <p>You pay the agreed hourly or project rate directly to the talent</p>
+            <div className="pricing-visual-container">
+              <div className="pricing-infographic">
+                {/* Talent Rate Component */}
+                <div className="pricing-component pricing-talent-rate">
+                  <div className="pricing-icon-container">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <h3 className="pricing-component-title">Talent Rate</h3>
+                  <p className="pricing-component-description">
+                    You pay the agreed hourly or project rate directly to the talent
+                  </p>
                 </div>
-                <div className="pricing-item">
-                  <h3>+</h3>
+
+                {/* Plus Symbol */}
+                <div className="pricing-plus-container">
+                  +
                 </div>
-                <div className="pricing-item">
-                  <h3>15% Platform Fee</h3>
-                  <p>One-time fee for matching, vetting, and ongoing support</p>
+
+                {/* Platform Fee Component */}
+                <div className="pricing-component pricing-platform-fee">
+                  <div className="pricing-icon-container">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </div>
+                  <h3 className="pricing-component-title">15% Platform Fee</h3>
+                  <p className="pricing-component-description">
+                    One-time fee for matching, vetting, and ongoing support
+                  </p>
+                </div>
+
+                {/* Equals Symbol */}
+                <div className="pricing-equals-container">
+                  <div className="pricing-equals">
+                    =
+                  </div>
+                </div>
+
+                {/* Total Component */}
+                <div className="pricing-component pricing-total">
+                  <div className="pricing-icon-container" style={{background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'}}>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                    </svg>
+                  </div>
+                  <h3 className="pricing-component-title">Your Total Cost</h3>
+                  <p className="pricing-component-description">
+                    Simple, predictable pricing with no hidden fees
+                  </p>
                 </div>
               </div>
+
+              {/* Result Box */}
+              <div className="pricing-result">
+                <h4 className="pricing-result-title">What You Get</h4>
+                <div className="pricing-benefits">
+                  <div className="pricing-benefit-item">
+                    <svg className="pricing-benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span className="pricing-benefit-text">Pre-vetted talent</span>
+                  </div>
+                  <div className="pricing-benefit-item">
+                    <svg className="pricing-benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span className="pricing-benefit-text">48-hour matching</span>
+                  </div>
+                  <div className="pricing-benefit-item">
+                    <svg className="pricing-benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span className="pricing-benefit-text">Ongoing support</span>
+                  </div>
+                  <div className="pricing-benefit-item">
+                    <svg className="pricing-benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span className="pricing-benefit-text">Quality guarantee</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Example Calculation */}
               <div className="pricing-example">
-                <p>
-                  <strong>Example:</strong> If you hire a developer at $50/hour, you pay $50/hour + $7.50 platform fee = $57.50/hour total
-                </p>
+                <div className="pricing-example-content">
+                  <p>
+                    <strong>Example:</strong> If you hire a developer at <span className="pricing-highlight">$50/hour</span>, 
+                    you pay <span className="pricing-highlight">$50/hour + $7.50 platform fee = $57.50/hour total</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

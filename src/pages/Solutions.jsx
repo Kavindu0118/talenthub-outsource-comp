@@ -1,0 +1,277 @@
+import React from 'react';
+import ProjectRequestForm from '../components/forms/ProjectRequestForm';
+import { 
+  CodeBracketIcon, 
+  DevicePhoneMobileIcon, 
+  GlobeAltIcon,
+  ChartBarIcon,
+  CloudIcon,
+  CogIcon,
+  ShieldCheckIcon,
+  BoltIcon
+} from '@heroicons/react/24/outline';
+import Button from '../components/common/Button';
+
+const Solutions = () => {
+    const services = [
+    {
+      icon: <CodeBracketIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Web Development',
+      description: 'Custom web applications built with modern frameworks like React, Vue, Angular, and Node.js'
+    },
+    {
+      icon: <DevicePhoneMobileIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Mobile Applications',
+      description: 'Native iOS and Android apps, or cross-platform solutions using React Native and Flutter'
+    },
+    {
+      icon: <GlobeAltIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'E-commerce Solutions',
+      description: 'Complete online stores with payment gateways, inventory management, and analytics'
+    },
+    {
+      icon: <ChartBarIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Business Software',
+      description: 'CRM systems, ERP solutions, and custom business process automation tools'
+    },
+    {
+      icon: <CloudIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Cloud Solutions',
+      description: 'AWS, Azure, and Google Cloud deployment, migration, and optimization services'
+    },
+    {
+      icon: <CogIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'API Development',
+      description: 'RESTful APIs, GraphQL endpoints, and third-party integrations'
+    }
+  ];
+
+  const features = [
+    {
+      icon: <ShieldCheckIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Quality Assurance',
+      description: 'Rigorous testing and code review processes ensure bug-free delivery'
+    },
+    {
+      icon: <BoltIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Agile Development',
+      description: 'Fast, iterative development with regular updates and client feedback'
+    },
+    {
+      icon: <CogIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Ongoing Support',
+      description: 'Post-launch maintenance, updates, and technical support included'
+    }
+  ];
+
+  const processSteps = [
+    {
+      step: 1,
+      title: 'Project Discovery',
+      description: 'We analyze your requirements, goals, and technical specifications',
+      timeline: '1-2 days'
+    },
+    {
+      step: 2,
+      title: 'Proposal & Planning',
+      description: 'Detailed project proposal with timeline, milestones, and cost breakdown',
+      timeline: '2-3 days'
+    },
+    {
+      step: 3,
+      title: 'Design & Development',
+      description: 'Our expert team brings your vision to life with cutting-edge technology',
+      timeline: '2-12 weeks'
+    },
+    {
+      step: 4,
+      title: 'Testing & Deployment',
+      description: 'Thorough testing, optimization, and seamless deployment to production',
+      timeline: '1-2 weeks'
+    },
+    {
+      step: 5,
+      title: 'Launch & Support',
+      description: 'Go live with ongoing maintenance and support for continued success',
+      timeline: 'Ongoing'
+    }
+  ];
+
+  return (
+    <div className="page-container">
+      {/* Hero Section */}
+      <section className="hero-section hero-gradient">
+        <div className="container">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Custom Software Solutions for Your Business
+            </h1>
+            <p className="hero-subtitle">
+              From concept to deployment, we deliver scalable software solutions that drive growth and efficiency for your business.
+            </p>
+            <div className="cta-buttons">
+              <Button 
+                variant="primary" 
+                size="lg" 
+                className="btn-primary"
+                href="#get-quote"
+                style={{ backgroundColor: '#3b82f6', color: 'white' }}
+              >
+                Get Free Quote
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="cta-button-secondary"
+                href="#our-process"
+                style={{ 
+                  borderColor: '#3b82f6', 
+                  color: '#3b82f6',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#3b82f6';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#3b82f6';
+                }}
+              >
+                See Our Process
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="section-padding">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">
+              Our Software Development Services
+            </h2>
+            <p className="section-description">
+              We specialize in building modern, scalable software solutions using the latest technologies
+            </p>
+          </div>
+
+          <div className="benefits-grid">
+            {services.map((service, index) => (
+              <div key={index} className="benefit-card">
+                <div className="benefit-icon">{service.icon}</div>
+                <h3 className="benefit-title">{service.title}</h3>
+                <p className="benefit-description">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="section-padding section-bg-gray">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">
+              Why Choose Our Development Team?
+            </h2>
+            <p className="section-description">
+              We combine technical expertise with business understanding to deliver exceptional results
+            </p>
+          </div>
+
+          <div className="benefits-grid">
+            {features.map((feature, index) => (
+              <div key={index} className="benefit-card">
+                <div className="benefit-icon">{feature.icon}</div>
+                <h3 className="benefit-title">{feature.title}</h3>
+                <p className="benefit-description">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section id="our-process" className="section-padding">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">
+              Our Development Process
+            </h2>
+            <p className="section-description">
+              A proven methodology that ensures your project is delivered on time, on budget, and exceeds expectations
+            </p>
+          </div>
+
+          <div className="process-container">
+            {processSteps.map((step, index) => (
+              <div key={index} className="process-step">
+                <div className="process-step-icon-container">
+                  <div className="process-step-icon">
+                    {step.step}
+                  </div>
+                  {index < processSteps.length - 1 && (
+                    <div className="process-step-line"></div>
+                  )}
+                </div>
+                <div className="process-step-content">
+                  <div className="process-step-header">
+                    <h3 className="process-step-title">{step.title}</h3>
+                    <span className="process-step-timeline">
+                      {step.timeline}
+                    </span>
+                  </div>
+                  <p className="process-step-description">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Form Section */}
+      <section id="get-quote" className="section-padding section-bg-gray">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">
+              Start Your Project Today
+            </h2>
+            <p className="section-description">
+              Tell us about your project requirements and we'll provide you with a detailed proposal within 24 hours
+            </p>
+          </div>
+
+          <ProjectRequestForm />
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="cta-section">
+        <div className="cta-container">
+          <div className="cta-content">
+            <h2 className="cta-title">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="cta-subtitle">
+              Let's discuss how we can help you build the perfect software solution for your needs
+            </p>
+            <div className="cta-buttons">
+              <Button 
+                variant="secondary" 
+                size="lg" 
+                className="cta-button-primary"
+                href="mailto:hello@workforce.com"
+              >
+                Contact Our Team
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Solutions;

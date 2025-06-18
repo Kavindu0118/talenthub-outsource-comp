@@ -4,6 +4,7 @@ import Footer from './components/common/Footer';
 import Home from './pages/Home';
 import HowWeHire from './pages/HowWeHire';
 import OurRoles from './pages/OurRoles';
+import Solutions from './pages/Solutions';
 import HireWithUs from './pages/HireWithUs';
 import TalentApplication from './pages/TalentApplication';
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/how-we-hire" element={<HowWeHire />} />
             <Route path="/our-roles" element={<OurRoles />} />
+            <Route path="/solutions" element={<Solutions />} />
             <Route path="/hire-with-us" element={<HireWithUs />} />
             <Route path="/talent-application" element={<TalentApplication />} />
           </Routes>

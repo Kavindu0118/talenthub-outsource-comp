@@ -1,18 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-@layer base {
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: rgb(249 250 251);
-    color: rgb(17 24 39);
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
+/* Base Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: rgb(249 250 251);
+  color: rgb(17 24 39);
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-@layer components {
+/* Components */
   .btn-primary {
     background-color: #2563eb;
     color: white;
@@ -89,4 +85,211 @@
       padding-right: 2rem;
     }
   }
+  
+  .benefits-section-reduced-top {
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
+    background-color: #f9fafb;
+  }
+
+  @media (min-width: 640px) {
+    .benefits-section-reduced-top {
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .benefits-section-reduced-top {
+      padding-top: 2.5rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+/* Talent Application Styles */
+.talent-benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .talent-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .talent-benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.talent-benefit-card {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.talent-benefit-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.talent-benefit-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+}
+
+.talent-form-container {
+  max-width: 64rem;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .talent-form-container {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .talent-form-container {
+    padding: 3rem;
+  }
+}
+
+/* Utility Classes to Replace Tailwind */
+.section-header-center {
+  text-align: center;
+}
+
+.button-container-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Loading Spinner Styles */
+.spinner-container {
+  display: inline-block;
+}
+
+.spinner {
+  width: 100%;
+  height: 100%;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-right-color: transparent;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Work Type Options */
+.work-type-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.work-type-checkbox {
+  border-radius: 0.25rem;
+  border: 1px solid #d1d5db;
+  color: #2563eb;
+}
+
+.work-type-checkbox:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.work-type-label {
+  font-size: 0.875rem;
 }

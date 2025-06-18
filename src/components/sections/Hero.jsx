@@ -33,19 +33,8 @@ const Hero = () => {
           </Link>
         </div>
 
-        {/* Stats */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(3, 1fr)', 
-          gap: '2rem',
-          marginTop: '3rem',
-          paddingTop: '2rem',
-          borderTop: '1px solid rgba(100, 116, 139, 0.3)'
-        }}>
-          
-          
-          
-        </div>
+        
+        
       </div>
     </section>
   );

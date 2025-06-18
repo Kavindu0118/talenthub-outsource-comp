@@ -340,14 +340,14 @@ const TalentForm = () => {
               </label>
               <div className="work-type-options">
                 {['Full-time', 'Part-time', 'Contract', 'Freelance'].map((type) => (
-                  <label key={type} className="flex items-center space-x-2">
+                  <label key={type} className="work-type-option">
                     <input
                       type="checkbox"
                       value={type.toLowerCase()}
                       {...register('workType')}
-                      className="rounded border-gray-300 text-primary focus:ring-primary"
+                      className="work-type-checkbox"
                     />
-                    <span className="text-sm">{type}</span>
+                    <span className="work-type-label">{type}</span>
                   </label>
                 ))}
               </div>

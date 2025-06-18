@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { 
   EnvelopeIcon, 
   PhoneIcon, 
-  MapPinIcon,
   BuildingOfficeIcon,
   UserGroupIcon,
   BriefcaseIcon 
@@ -28,8 +27,7 @@ const Footer = () => {
     legal: [
       { name: 'Privacy Policy', href: '/privacy' },
       { name: 'Terms of Service', href: '/terms' },
-      { name: 'Cookie Policy', href: '/cookies' },
-      { name: 'GDPR Compliance', href: '/gdpr' },
+      
     ],
   };
 
@@ -52,10 +50,6 @@ const Footer = () => {
               <div className="footer-contact-item">
                 <PhoneIcon className="footer-contact-icon" />
                 <span>+1 (555) 123-4567</span>
-              </div>
-              <div className="footer-contact-item">
-                <MapPinIcon className="footer-contact-icon" />
-                <span>San Francisco, CA</span>
               </div>
             </div>
           </div>

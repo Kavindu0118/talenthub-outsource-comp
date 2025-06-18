@@ -13,32 +13,32 @@ import Button from '../components/common/Button';
 const HireWithUs = () => {
   const benefits = [
     {
-      icon: <ClockIcon className="h-8 w-8" />,
+      icon: <ClockIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Fast Matching',
       description: 'Get matched with qualified talent in 24-48 hours, not weeks'
     },
     {
-      icon: <ShieldCheckIcon className="h-8 w-8" />,
+      icon: <ShieldCheckIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Pre-Vetted Quality',
       description: 'Every professional has passed our rigorous 6-stage screening process'
     },
     {
-      icon: <UserGroupIcon className="h-8 w-8" />,
+      icon: <UserGroupIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Perfect Fit Guarantee',
       description: 'We ensure the talent matches your project requirements and culture'
     },
     {
-      icon: <CurrencyDollarIcon className="h-8 w-8" />,
+      icon: <CurrencyDollarIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Transparent Pricing',
       description: 'No hidden fees - pay only the talent rate plus a small platform fee'
     },
     {
-      icon: <ChatBubbleLeftRightIcon className="h-8 w-8" />,
+      icon: <ChatBubbleLeftRightIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Dedicated Support',
       description: 'Ongoing support from our team throughout your project'
     },
     {
-      icon: <CheckCircleIcon className="h-8 w-8" />,
+      icon: <CheckCircleIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Success Guarantee',
       description: 'We stand behind our matches with a satisfaction guarantee'
     }
@@ -53,24 +53,18 @@ const HireWithUs = () => {
     },
     {
       step: 2,
-      title: 'Get Matched',
-      description: 'Our AI-powered matching system finds the best talent from our pre-vetted network',
-      timeline: '24-48 hours'
-    },
-    {
-      step: 3,
       title: 'Review Profiles',
       description: 'Review detailed profiles of matched candidates including portfolios and past work',
       timeline: '1-2 days'
     },
     {
-      step: 4,
+      step: 3,
       title: 'Interview & Select',
       description: 'Interview your top candidates and select the best fit for your project',
       timeline: '2-3 days'
     },
     {
-      step: 5,
+      step: 4,
       title: 'Start Your Project',
       description: 'Begin working with your selected talent with full support from our team',
       timeline: 'Immediate'
