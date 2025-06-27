@@ -13,10 +13,10 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { name: 'About Us', href: '/about' },
+      { name: 'About Us', href: '/about-us' },
       { name: 'How We Hire', href: '/how-we-hire' },
       { name: 'Our Roles', href: '/our-roles' },
-      { name: 'Resources', href: '/resources' },
+      { name: 'Solutions', href: '/solutions' },
     ],
     services: [
       { name: 'Hire Talent', href: '/hire-with-us' },

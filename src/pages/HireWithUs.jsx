@@ -6,9 +6,11 @@ import {
   UserGroupIcon,
   CurrencyDollarIcon,
   ChatBubbleLeftRightIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+  RocketLaunchIcon
 } from '@heroicons/react/24/outline';
 import Button from '../components/common/Button';
+import '../styles/components/hirewithus.css';
 
 const HireWithUs = () => {
   const benefits = [
@@ -103,49 +105,88 @@ const HireWithUs = () => {
   return (
     <div className="page-container">
       {/* Hero Section */}
-      <section className="hero-section hero-gradient">
-        <div className="container">
-          <div className="hero-content">
-            <h1 className="hero-title">
-              Hire Top Talent in 48 Hours
+      <section className="hirewithus-hero">
+        <div className="hirewithus-hero-container">
+          <div className="hirewithus-hero-content">
+            <div className="hirewithus-hero-badge">
+              <RocketLaunchIcon className="hirewithus-hero-badge-icon" />
+              <span className="hirewithus-hero-badge-text">RAPID HIRING</span>
+            </div>
+            <h1 className="hirewithus-hero-title">
+              Hire Top Talent in 
+              <br />
+              <span className="hirewithus-hero-highlight">48 Hours</span>
             </h1>
-            <p className="hero-subtitle">
-              Skip the lengthy hiring process. Get matched with pre-vetted professionals who are ready to start immediately.
+            <p className="hirewithus-hero-subtitle">
+              Skip the lengthy hiring process. Get matched with pre-vetted professionals 
+              who are ready to start immediately and deliver exceptional results.
             </p>
-            <div className="cta-buttons">
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="btn-primary"
-                href="#get-started"
-                style={{ backgroundColor: '#3b82f6', color: 'white' }}
-              >
-                Get Started Now
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="cta-button-secondary"
-                href="#how-it-works"
-                style={{ 
-                  borderColor: '#3b82f6', 
-                  color: '#3b82f6',
-                  transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#3b82f6';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = '#3b82f6';
-                }}
-              >
-                See How It Works
-              </Button>
+            
+            <div className="hirewithus-hero-stats">
+              <div className="hirewithus-hero-stat">
+                <div className="hirewithus-hero-stat-number">48h</div>
+                <div className="hirewithus-hero-stat-label">Average Match Time</div>
+                <div className="hirewithus-hero-stat-description">From request to working</div>
+              </div>
+              <div className="hirewithus-hero-stat">
+                <div className="hirewithus-hero-stat-number">95%</div>
+                <div className="hirewithus-hero-stat-label">Success Rate</div>
+                <div className="hirewithus-hero-stat-description">Client satisfaction</div>
+              </div>
+              <div className="hirewithus-hero-stat">
+                <div className="hirewithus-hero-stat-number">500+</div>
+                <div className="hirewithus-hero-stat-label">Vetted Talents</div>
+                <div className="hirewithus-hero-stat-description">Ready to hire</div>
+              </div>
+            </div>
+            
+            <div className="hirewithus-hero-cta">
+              <div className="cta-buttons">
+                <Button 
+                  variant="primary" 
+                  size="lg" 
+                  className="btn-primary"
+                  href="#get-started"
+                  style={{ backgroundColor: '#3b82f6', color: 'white' }}
+                >
+                  Get Started Now
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="cta-button-secondary"
+                  href="#how-it-works"
+                  style={{ 
+                    borderColor: '#3b82f6', 
+                    color: '#3b82f6',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#3b82f6';
+                    e.currentTarget.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = '#3b82f6';
+                  }}
+                >
+                  See How It Works
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Floating Elements */}
+        <div className="hirewithus-hero-floating-elements">
+          <div className="hirewithus-hero-clock"></div>
+          <div className="hirewithus-hero-profile"></div>
+          <div className="hirewithus-hero-checkmark"></div>
+          <div className="hirewithus-hero-handshake"></div>
+        </div>
+
+        {/* Background Pattern */}
+        <div className="hirewithus-hero-pattern"></div>
       </section>
 
       {/* Benefits Section */}

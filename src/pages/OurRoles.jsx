@@ -7,8 +7,11 @@ import {
   ChartBarIcon,
   MegaphoneIcon,
   CogIcon,
-  ShieldCheckIcon
+  ShieldCheckIcon,
+  BriefcaseIcon,
+  StarIcon
 } from '@heroicons/react/24/outline';
+import '../styles/components/ourroles.css';
 
 const OurRoles = () => {
   const roleCategories = [
@@ -141,25 +144,67 @@ const OurRoles = () => {
   return (
     <div className="page-container">
       {/* Hero Section */}
-      <section className="hero-section hero-gradient">
-        <div className="container">
-          <div className="hero-content">
-            <h1 className="hero-title">
-              Find the Perfect Role
+      <section className="ourroles-hero">
+        <div className="ourroles-hero-container">
+          <div className="ourroles-hero-content">
+            <div className="ourroles-hero-badge">
+              <BriefcaseIcon className="ourroles-hero-badge-icon" />
+              <span className="ourroles-hero-badge-text">TALENT MARKETPLACE</span>
+            </div>
+            <h1 className="ourroles-hero-title">
+              Find the 
+              <br />
+              <span className="ourroles-hero-highlight">Perfect Role</span>
             </h1>
-            <p className="hero-subtitle">
-              Explore our comprehensive range of roles across technology, design, marketing, and specialized fields
+            <p className="ourroles-hero-subtitle">
+              Explore our comprehensive range of pre-vetted professionals across technology, 
+              design, marketing, and specialized fields ready to elevate your projects.
             </p>
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              className="hero-btn hero-btn-primary"
-              href="/hire-with-us"
-            >
-              Start Hiring
-            </Button>
+            
+            <div className="ourroles-hero-stats">
+              <div className="ourroles-hero-stat">
+                <div className="ourroles-hero-stat-number">200+</div>
+                <div className="ourroles-hero-stat-label">Available Roles</div>
+              </div>
+              <div className="ourroles-hero-stat">
+                <div className="ourroles-hero-stat-number">6</div>
+                <div className="ourroles-hero-stat-label">Categories</div>
+              </div>
+              <div className="ourroles-hero-stat">
+                <div className="ourroles-hero-stat-number">48hr</div>
+                <div className="ourroles-hero-stat-label">Matching</div>
+              </div>
+              <div className="ourroles-hero-stat">
+                <div className="ourroles-hero-stat-number">95%</div>
+                <div className="ourroles-hero-stat-label">Success Rate</div>
+              </div>
+            </div>
+            
+            <div className="ourroles-hero-cta">
+              <Button 
+                variant="secondary" 
+                size="lg" 
+                className="hero-btn hero-btn-primary"
+                href="/hire-with-us"
+              >
+                Start Hiring
+              </Button>
+            </div>
           </div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="ourroles-hero-floating-elements">
+          <div className="ourroles-hero-rect ourroles-hero-rect-1"></div>
+          <div className="ourroles-hero-rect ourroles-hero-rect-2"></div>
+          <div className="ourroles-hero-rect ourroles-hero-rect-3"></div>
+          <div className="ourroles-hero-circle ourroles-hero-circle-1"></div>
+          <div className="ourroles-hero-circle ourroles-hero-circle-2"></div>
+          <div className="ourroles-hero-triangle"></div>
+        </div>
+        
+        {/* Professional Grid Background */}
+        <div className="ourroles-hero-grid"></div>
       </section>
 
       {/* Role Categories */}
@@ -422,9 +467,9 @@ const OurRoles = () => {
                 variant="outline" 
                 size="lg" 
                 className="cta-button-secondary"
-                href="/how-we-hire"
+                href="/solutions"
               >
-                Learn About Our Process
+                Request a Project
               </Button>
             </div>
           </div>

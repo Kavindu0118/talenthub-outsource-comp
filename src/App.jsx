@@ -7,6 +7,7 @@ import OurRoles from './pages/OurRoles';
 import Solutions from './pages/Solutions';
 import HireWithUs from './pages/HireWithUs';
 import TalentApplication from './pages/TalentApplication';
+import AboutUs from './pages/AboutUs';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/hire-with-us" element={<HireWithUs />} />
             <Route path="/talent-application" element={<TalentApplication />} />
+            <Route path="/about-us" element={<AboutUs />} />
           </Routes>
         </main>
         <Footer />

@@ -1,0 +1,419 @@
+/* HireWithUs Page Specific Styles */
+
+/* HireWithUs Hero Section */
+.hirewithus-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #ffffff;
+  
+  /* Overlay for depth */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.08) 50%, rgba(236, 72, 153, 0.05) 100%);
+    z-index: 1;
+  }
+}
+
+.hirewithus-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.hirewithus-hero-content {
+  color: #1f2937;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hirewithus-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hirewithus-hero-badge-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #3b82f6;
+}
+
+.hirewithus-hero-badge-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #3b82f6;
+}
+
+.hirewithus-hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hirewithus-hero-highlight {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.hirewithus-hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #6b7280;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.hirewithus-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.hirewithus-hero-stat {
+  text-align: center;
+  background: rgba(59, 130, 246, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hirewithus-hero-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.hirewithus-hero-stat:hover::before {
+  left: 100%;
+}
+
+.hirewithus-hero-stat:hover {
+  transform: translateY(-5px);
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.hirewithus-hero-stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hirewithus-hero-stat-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+.hirewithus-hero-stat-description {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hirewithus-hero-cta {
+  animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/* Floating Elements */
+.hirewithus-hero-floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hirewithus-hero-clock {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 20%;
+  left: 10%;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.hirewithus-hero-clock::before {
+  content: '🕐';
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.hirewithus-hero-profile {
+  position: absolute;
+  width: 100px;
+  height: 60px;
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 0.75rem;
+  top: 30%;
+  right: 10%;
+  animation: float 6s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hirewithus-hero-profile::before {
+  content: '👤';
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.hirewithus-hero-checkmark {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(236, 72, 153, 0.05);
+  border: 1px solid rgba(236, 72, 153, 0.1);
+  border-radius: 50%;
+  bottom: 25%;
+  left: 15%;
+  animation: bounce 5s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hirewithus-hero-checkmark::before {
+  content: '✓';
+  font-size: 1.5rem;
+  color: rgba(236, 72, 153, 0.6);
+  font-weight: bold;
+}
+
+.hirewithus-hero-handshake {
+  position: absolute;
+  width: 90px;
+  height: 70px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 0.5rem;
+  bottom: 20%;
+  right: 20%;
+  animation: float 7s ease-in-out infinite reverse;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hirewithus-hero-handshake::before {
+  content: '🤝';
+  font-size: 1.75rem;
+  opacity: 0.6;
+}
+
+/* Background Pattern */
+.hirewithus-hero-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.08) 2px, transparent 2px),
+    radial-gradient(circle at 75% 25%, rgba(139, 92, 246, 0.08) 2px, transparent 2px),
+    radial-gradient(circle at 25% 75%, rgba(236, 72, 153, 0.08) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.08) 2px, transparent 2px);
+  background-size: 100px 100px, 120px 120px, 80px 80px, 110px 110px;
+  animation: patternMove 25s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes patternMove {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(20px) translateY(-10px);
+  }
+  50% {
+    transform: translateX(0) translateY(-20px);
+  }
+  75% {
+    transform: translateX(-20px) translateY(-10px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Enhanced hover effects */
+.hirewithus-hero-badge:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+  .hirewithus-hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hirewithus-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hirewithus-hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .hirewithus-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 400px;
+  }
+  
+  .hirewithus-hero-stat {
+    padding: 1.5rem 1rem;
+  }
+  
+  .hirewithus-hero-stat-number {
+    font-size: 2rem;
+  }
+  
+  .hirewithus-hero-floating-elements .hirewithus-hero-clock,
+  .hirewithus-hero-floating-elements .hirewithus-hero-profile {
+    display: none;
+  }
+  
+  .hirewithus-hero-checkmark {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .hirewithus-hero-handshake {
+    width: 70px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hirewithus-hero-title {
+    font-size: 2rem;
+  }
+  
+  .hirewithus-hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hirewithus-hero-container {
+    padding: 0 1rem;
+  }
+  
+  .hirewithus-hero-stat-number {
+    font-size: 1.75rem;
+  }
+  
+  .hirewithus-hero-floating-elements {
+    display: none;
+  }
+}

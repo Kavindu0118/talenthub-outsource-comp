@@ -8,9 +8,11 @@ import {
   CloudIcon,
   CogIcon,
   ShieldCheckIcon,
-  BoltIcon
+  BoltIcon,
+  RocketLaunchIcon
 } from '@heroicons/react/24/outline';
 import Button from '../components/common/Button';
+import '../styles/components/solutions.css';
 
 const Solutions = () => {
     const services = [
@@ -100,49 +102,102 @@ const Solutions = () => {
   return (
     <div className="page-container">
       {/* Hero Section */}
-      <section className="hero-section hero-gradient">
-        <div className="container">
-          <div className="hero-content">
-            <h1 className="hero-title">
-              Custom Software Solutions for Your Business
+      <section className="solutions-hero">
+        <div className="solutions-hero-container">
+          <div className="solutions-hero-content">
+            <div className="solutions-hero-badge">
+              <RocketLaunchIcon className="solutions-hero-badge-icon" />
+              <span className="solutions-hero-badge-text">CUSTOM DEVELOPMENT</span>
+            </div>
+            <h1 className="solutions-hero-title">
+              Custom Software 
+              <br />
+              <span className="solutions-hero-highlight">Solutions</span>
             </h1>
-            <p className="hero-subtitle">
-              From concept to deployment, we deliver scalable software solutions that drive growth and efficiency for your business.
+            <p className="solutions-hero-subtitle">
+              From concept to deployment, we deliver scalable software solutions that drive 
+              growth and efficiency for your business with cutting-edge technology.
             </p>
-            <div className="cta-buttons">
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="btn-primary"
-                href="#get-quote"
-                style={{ backgroundColor: '#3b82f6', color: 'white' }}
-              >
-                Get Free Quote
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="cta-button-secondary"
-                href="#our-process"
-                style={{ 
-                  borderColor: '#3b82f6', 
-                  color: '#3b82f6',
-                  transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#3b82f6';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = '#3b82f6';
-                }}
-              >
-                See Our Process
-              </Button>
+            
+            <div className="solutions-hero-services">
+              <div className="solutions-hero-service">
+                <div className="solutions-hero-service-icon">
+                  <CodeBracketIcon className="h-4 w-4" />
+                </div>
+                <h3 className="solutions-hero-service-title">Web Apps</h3>
+                <p className="solutions-hero-service-tech">React, Node.js</p>
+              </div>
+              <div className="solutions-hero-service">
+                <div className="solutions-hero-service-icon">
+                  <DevicePhoneMobileIcon className="h-4 w-4" />
+                </div>
+                <h3 className="solutions-hero-service-title">Mobile Apps</h3>
+                <p className="solutions-hero-service-tech">iOS, Android</p>
+              </div>
+              <div className="solutions-hero-service">
+                <div className="solutions-hero-service-icon">
+                  <CloudIcon className="h-4 w-4" />
+                </div>
+                <h3 className="solutions-hero-service-title">Cloud Solutions</h3>
+                <p className="solutions-hero-service-tech">AWS, Azure</p>
+              </div>
+              <div className="solutions-hero-service">
+                <div className="solutions-hero-service-icon">
+                  <ChartBarIcon className="h-4 w-4" />
+                </div>
+                <h3 className="solutions-hero-service-title">Business Software</h3>
+                <p className="solutions-hero-service-tech">CRM, ERP</p>
+              </div>
+            </div>
+            
+            <div className="solutions-hero-cta">
+              <div className="cta-buttons">
+                <Button 
+                  variant="primary" 
+                  size="lg" 
+                  className="btn-primary"
+                  href="#get-quote"
+                  style={{ backgroundColor: '#3b82f6', color: 'white' }}
+                >
+                  Get Free Quote
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="cta-button-secondary"
+                  href="#our-process"
+                  style={{ 
+                    borderColor: '#3b82f6', 
+                    color: '#3b82f6',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#3b82f6';
+                    e.currentTarget.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = '#3b82f6';
+                  }}
+                >
+                  See Our Process
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="solutions-hero-floating-elements">
+          <div className="solutions-hero-gear solutions-hero-gear-1"></div>
+          <div className="solutions-hero-gear solutions-hero-gear-2"></div>
+          <div className="solutions-hero-gear solutions-hero-gear-3"></div>
+          <div className="solutions-hero-code-block"></div>
+          <div className="solutions-hero-mobile"></div>
+        </div>
+        
+        {/* Tech Stack Background */}
+        <div className="solutions-hero-tech-dots"></div>
       </section>
 
       {/* Services Section */}

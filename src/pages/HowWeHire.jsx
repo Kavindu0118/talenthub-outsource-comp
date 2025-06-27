@@ -8,10 +8,13 @@ import {
   HandThumbUpIcon,
   UserGroupIcon,
   ShieldCheckIcon,
-  ClockIcon
+  ClockIcon,
+  CheckBadgeIcon,
+  StarIcon
 } from '@heroicons/react/24/outline';
 import Button from '../components/common/Button';
 import ProcessSteps from '../components/sections/ProcessSteps';
+import '../styles/components/howwehire.css';
 
 const HowWeHire = () => {
   const vettingSteps = [
@@ -142,25 +145,78 @@ const HowWeHire = () => {
   return (
     <div className="page-container">
       {/* Hero Section */}
-      <section className="hero-section hero-gradient">
-        <div className="container">
-          <div className="hero-content">
-            <h1 className="hero-title">
-              How We Hire the Top 3%
+      <section className="howwehire-hero">
+        <div className="howwehire-hero-container">
+          <div className="howwehire-hero-content">
+            <div className="howwehire-hero-badge">
+              <CheckBadgeIcon className="howwehire-hero-badge-icon" />
+              <span className="howwehire-hero-badge-text">6-STAGE PROCESS</span>
+            </div>
+            <h1 className="howwehire-hero-title">
+              How We Hire the 
+              <br />
+              <span className="howwehire-hero-highlight">Top 3%</span>
             </h1>
-            <p className="hero-subtitle">
-              Our rigorous 6-stage vetting process ensures you work with only the best talent in the industry
+            <p className="howwehire-hero-subtitle">
+              Our rigorous vetting process ensures you work with only the most exceptional talent, 
+              saving you time and guaranteeing quality results for every project.
             </p>
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              className="hero-btn hero-btn-primary"
-              href="/hire-with-us"
-            >
-              Start Hiring Now
-            </Button>
+            
+            <div className="howwehire-hero-features">
+              <div className="howwehire-hero-feature">
+                <div className="howwehire-hero-feature-icon">
+                  <ShieldCheckIcon className="h-6 w-6" />
+                </div>
+                <h3 className="howwehire-hero-feature-title">Quality Guaranteed</h3>
+                <p className="howwehire-hero-feature-description">
+                  Only 3% of applicants pass our comprehensive evaluation
+                </p>
+              </div>
+              <div className="howwehire-hero-feature">
+                <div className="howwehire-hero-feature-icon">
+                  <ClockIcon className="h-6 w-6" />
+                </div>
+                <h3 className="howwehire-hero-feature-title">Fast Matching</h3>
+                <p className="howwehire-hero-feature-description">
+                  Pre-vetted talent means quicker project starts
+                </p>
+              </div>
+              <div className="howwehire-hero-feature">
+                <div className="howwehire-hero-feature-icon">
+                  <StarIcon className="h-6 w-6" />
+                </div>
+                <h3 className="howwehire-hero-feature-title">95% Success Rate</h3>
+                <p className="howwehire-hero-feature-description">
+                  Exceptional client satisfaction across all projects
+                </p>
+              </div>
+            </div>
+            
+            <div className="howwehire-hero-cta">
+              <Button 
+                variant="secondary" 
+                size="lg" 
+                className="hero-btn hero-btn-primary"
+                href="/hire-with-us"
+              >
+                Start Hiring Now
+              </Button>
+            </div>
           </div>
         </div>
+        
+        {/* Floating Elements */}
+        <div className="howwehire-hero-floating-elements">
+          <div className="howwehire-hero-hexagon howwehire-hero-hexagon-1"></div>
+          <div className="howwehire-hero-hexagon howwehire-hero-hexagon-2"></div>
+          <div className="howwehire-hero-hexagon howwehire-hero-hexagon-3"></div>
+          <div className="howwehire-hero-diamond"></div>
+          <div className="howwehire-hero-pentagon"></div>
+          <div className="howwehire-hero-process-line"></div>
+        </div>
+        
+        {/* Process Flow Background */}
+        <div className="howwehire-hero-process-dots"></div>
       </section>
 
       {/* Quality Metrics */}

@@ -1,0 +1,346 @@
+/* Our Roles Page Specific Styles */
+
+/* Our Roles Hero Section */
+.ourroles-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #ffffff;
+  
+  /* Overlay for depth */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.08) 50%, rgba(236, 72, 153, 0.05) 100%);
+    z-index: 1;
+  }
+}
+
+.ourroles-hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.ourroles-hero-content {
+  color: #1f2937;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ourroles-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+.ourroles-hero-badge-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #3b82f6;
+}
+
+.ourroles-hero-badge-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #3b82f6;
+}
+
+.ourroles-hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.ourroles-hero-highlight {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.ourroles-hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #6b7280;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.ourroles-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 2rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.ourroles-hero-stat {
+  text-align: center;
+  background: rgba(59, 130, 246, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.ourroles-hero-stat:hover {
+  transform: translateY(-5px);
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+}
+
+.ourroles-hero-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 0.25rem;
+}
+
+.ourroles-hero-stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.ourroles-hero-cta {
+  animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/* Floating Elements */
+.ourroles-hero-floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ourroles-hero-rect {
+  position: absolute;
+  background: rgba(59, 130, 246, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 0.5rem;
+}
+
+.ourroles-hero-rect-1 {
+  width: 120px;
+  height: 80px;
+  top: 15%;
+  left: 10%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.ourroles-hero-rect-2 {
+  width: 100px;
+  height: 60px;
+  top: 65%;
+  right: 12%;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.ourroles-hero-rect-3 {
+  width: 80px;
+  height: 50px;
+  bottom: 25%;
+  left: 18%;
+  animation: float 12s ease-in-out infinite;
+}
+
+.ourroles-hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.ourroles-hero-circle-1 {
+  width: 90px;
+  height: 90px;
+  top: 25%;
+  right: 15%;
+  animation: float 9s ease-in-out infinite;
+}
+
+.ourroles-hero-circle-2 {
+  width: 70px;
+  height: 70px;
+  bottom: 20%;
+  right: 25%;
+  animation: float 11s ease-in-out infinite reverse;
+}
+
+.ourroles-hero-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid rgba(236, 72, 153, 0.1);
+  top: 30%;
+  left: 20%;
+  animation: rotate 15s linear infinite;
+}
+
+/* Professional Grid Background */
+.ourroles-hero-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Enhanced hover effects */
+.ourroles-hero-badge:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ourroles-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .ourroles-hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .ourroles-hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .ourroles-hero-stat {
+    padding: 1rem 0.75rem;
+  }
+  
+  .ourroles-hero-stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .ourroles-hero-rect {
+    display: none;
+  }
+  
+  .ourroles-hero-circle-1 {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .ourroles-hero-circle-2 {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .ourroles-hero-triangle {
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 45px solid rgba(236, 72, 153, 0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .ourroles-hero-title {
+    font-size: 2rem;
+  }
+  
+  .ourroles-hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .ourroles-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .ourroles-hero-container {
+    padding: 0 1rem;
+  }
+}
