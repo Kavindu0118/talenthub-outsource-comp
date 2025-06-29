@@ -261,6 +261,14 @@ const OurRoles = () => {
                     <span className="rate-label">Hourly Rate: </span>
                     <span className="rate-value">{category.hourlyRange}</span>
                   </div>
+                  {/*button to apply*/}
+                  <Button 
+                    variant="primary" 
+                    size="sm"
+                    href="/TalentApplication"
+                  >
+                    Apply Now
+                  </Button>
                   <Button 
                     variant="primary" 
                     size="sm"
