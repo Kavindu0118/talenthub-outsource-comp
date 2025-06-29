@@ -21,8 +21,8 @@ const Footer = () => {
     services: [
       { name: 'Hire Talent', href: '/hire-with-us' },
       { name: 'Apply as Talent', href: '/talent-application' },
-      { name: 'Talent Vetting', href: '/how-we-hire' },
-      { name: 'Project Management', href: '/resources' },
+      { name: 'Request a Project', href: '/how-we-hire' },
+      
     ],
     legal: [
       { name: 'Privacy Policy', href: '/privacy' },
