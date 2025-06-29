@@ -2,37 +2,82 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../common/Button';
 import FileUpload from './FileUpload';
+import PhoneInput from './PhoneInput';
 import LoadingSpinner from '../common/LoadingSpinner';
+import Notification from '../common/Notification';
 import { validateEmail, validatePhone, validateRequired } from '../../utils/validation';
 import { useFormSubmission } from '../../hooks/useFormSubmission';
 
 const ClientForm = () => {
   const [projectFile, setProjectFile] = useState(null);
-  const { isSubmitting, submitForm } = useFormSubmission();
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const { isSubmitting, submitStatus, submitMessage, submitForm, resetStatus } = useFormSubmission();
   
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch
+    watch,
+    setValue,
+    trigger
   } = useForm();
 
   const projectType = watch('projectType');
 
   const onSubmit = async (data) => {
+    console.log('Form data before processing:', data);
+    console.log('Phone number from state:', phoneNumber);
+    console.log('Form errors:', errors);
+    
     const formData = {
       ...data,
+      contactName: `${data.firstName} ${data.lastName}`.trim(), // Combine first and last name
+      companyName: data.company || 'Not specified', // Map company field
+      phone: phoneNumber, // Use the phone number from PhoneInput
       projectFile: projectFile,
       type: 'client_inquiry'
     };
 
-    const success = await submitForm(formData, 'CLIENT_TEMPLATE');
-    if (success) {
+    console.log('Processed form data:', formData);
+
+    const result = await submitForm(formData, 'CLIENT_TEMPLATE');
+    if (result.success) {
       reset();
       setProjectFile(null);
+      setPhoneNumber('');
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        resetStatus();
+      }, 5000);
     }
   };
+
+  const handlePhoneChange = (e) => {
+    const phoneValue = e.target.value;
+    setPhoneNumber(phoneValue);
+    setValue('phone', phoneValue); // Update react-hook-form value
+    trigger('phone'); // Trigger validation
+  };
+
+  // Register the phone field with validation - fix the validation function
+  React.useEffect(() => {
+    register('phone', {
+      required: 'Phone number is required',
+      validate: (value) => {
+        console.log('Phone validation - value:', value);
+        if (!value || !value.trim()) {
+          return 'Phone number is required';
+        }
+        const isValid = validatePhone(value);
+        console.log('Phone validation result:', isValid);
+        if (!isValid) {
+          return 'Please enter a valid phone number (include country code if international)';
+        }
+        return true;
+      }
+    });
+  }, [register]);
 
   const projectTypes = [
     { value: 'web-development', label: 'Web Development' },
@@ -82,6 +127,40 @@ const ClientForm = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Form Errors Summary */}
+        {Object.keys(errors).length > 0 && (
+          <div className="form-errors-summary">
+            <h4>⚠️ Please fix the following errors:</h4>
+            <ul>
+              {Object.entries(errors).map(([field, error]) => {
+                // Make field names more user-friendly
+                const fieldNames = {
+                  firstName: 'First Name',
+                  lastName: 'Last Name',
+                  company: 'Company Name',
+                  email: 'Email Address',
+                  phone: 'Phone Number',
+                  projectType: 'Project Type',
+                  projectTitle: 'Project Title',
+                  projectDescription: 'Project Description',
+                  budget: 'Budget Range',
+                  timeline: 'Timeline',
+                  teamSize: 'Team Size',
+                  requiredSkills: 'Required Skills',
+                  customProjectType: 'Custom Project Type'
+                };
+                const friendlyFieldName = fieldNames[field] || field;
+                
+                return (
+                  <li key={field}>
+                    <strong>{friendlyFieldName}:</strong> {error.message}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
         {/* Contact Information */}
         <div className="form-section">
           <h3 className="form-section-title">Contact Information</h3>
@@ -93,7 +172,12 @@ const ClientForm = () => {
               <input
                 type="text"
                 {...register('firstName', { 
-                  validate: (value) => validateRequired(value, 'First name')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'First name is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-input ${errors.firstName ? 'error' : ''}`}
                 placeholder="Enter your first name"
@@ -110,7 +194,12 @@ const ClientForm = () => {
               <input
                 type="text"
                 {...register('lastName', { 
-                  validate: (value) => validateRequired(value, 'Last name')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Last name is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-input ${errors.lastName ? 'error' : ''}`}
                 placeholder="Enter your last name"
@@ -127,7 +216,15 @@ const ClientForm = () => {
               <input
                 type="email"
                 {...register('email', { 
-                  validate: validateEmail
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Email is required';
+                    }
+                    if (!validateEmail(value)) {
+                      return 'Please enter a valid email address';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-input ${errors.email ? 'error' : ''}`}
                 placeholder="Enter your email address"
@@ -138,32 +235,34 @@ const ClientForm = () => {
             </div>
 
             <div className="form-field">
-              <label className="form-field-label">
-                Phone Number <span className="required">*</span>
-              </label>
-              <input
-                type="tel"
-                {...register('phone', { 
-                  validate: validatePhone
-                })}
-                className={`form-field-input ${errors.phone ? 'error' : ''}`}
-                placeholder="Enter your phone number"
+              <PhoneInput
+                value={phoneNumber}
+                onChange={handlePhoneChange}
+                error={errors.phone?.message}
+                required={true}
               />
-              {errors.phone && (
-                <p className="form-field-error">{errors.phone.message}</p>
-              )}
             </div>
 
             <div className="form-field">
               <label className="form-field-label">
-                Company Name
+                Company Name <span className="required">*</span>
               </label>
               <input
                 type="text"
-                {...register('company')}
-                className="form-field-input"
-                placeholder="Your company name (optional)"
+                {...register('company', { 
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Company name is required';
+                    }
+                    return true;
+                  }
+                })}
+                className={`form-field-input ${errors.company ? 'error' : ''}`}
+                placeholder="Your company name"
               />
+              {errors.company && (
+                <p className="form-field-error">{errors.company.message}</p>
+              )}
             </div>
 
             <div className="form-field">
@@ -190,7 +289,12 @@ const ClientForm = () => {
               </label>
               <select
                 {...register('projectType', { 
-                  validate: (value) => validateRequired(value, 'Project type')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Project type is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-select ${errors.projectType ? 'error' : ''}`}
               >
@@ -232,7 +336,12 @@ const ClientForm = () => {
               <input
                 type="text"
                 {...register('projectTitle', { 
-                  validate: (value) => validateRequired(value, 'Project title')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Project title is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-input ${errors.projectTitle ? 'error' : ''}`}
                 placeholder="Give your project a descriptive title"
@@ -249,11 +358,24 @@ const ClientForm = () => {
               <textarea
                 rows={5}
                 {...register('projectDescription', { 
-                  validate: (value) => validateRequired(value, 'Project description')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Project description is required';
+                    }
+                    if (value.length < 20) {
+                      return 'Project description must be at least 20 characters';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-textarea ${errors.projectDescription ? 'error' : ''}`}
-                placeholder="Describe your project in detail. What are you trying to achieve? What features do you need? What's the scope of work?"
+                placeholder="Describe your project in detail. What are you trying to achieve? What features do you need? What's the scope of work? (minimum 20 characters)"
               />
+              <div className="form-field-meta">
+                <span className={`character-count ${watch('projectDescription')?.length >= 20 ? 'valid' : 'invalid'}`}>
+                  {watch('projectDescription')?.length || 0}/20 characters minimum
+                </span>
+              </div>
               {errors.projectDescription && (
                 <p className="form-field-error">{errors.projectDescription.message}</p>
               )}
@@ -265,7 +387,12 @@ const ClientForm = () => {
               </label>
               <select
                 {...register('budget', { 
-                  validate: (value) => validateRequired(value, 'Budget')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Budget range is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-select ${errors.budget ? 'error' : ''}`}
               >
@@ -287,7 +414,12 @@ const ClientForm = () => {
               </label>
               <select
                 {...register('timeline', { 
-                  validate: (value) => validateRequired(value, 'Timeline')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Timeline is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-select ${errors.timeline ? 'error' : ''}`}
               >
@@ -308,7 +440,12 @@ const ClientForm = () => {
               </label>
               <select
                 {...register('teamSize', { 
-                  validate: (value) => validateRequired(value, 'Team size')
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Team size is required';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-select ${errors.teamSize ? 'error' : ''}`}
               >
@@ -326,14 +463,24 @@ const ClientForm = () => {
 
             <div className="form-field form-row-full">
               <label className="form-field-label">
-                Required Skills/Technologies
+                Required Skills/Technologies <span className="required">*</span>
               </label>
               <textarea
                 rows={3}
-                {...register('requiredSkills')}
-                className="form-field-textarea"
+                {...register('requiredSkills', { 
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Required skills are required';
+                    }
+                    return true;
+                  }
+                })}
+                className={`form-field-textarea ${errors.requiredSkills ? 'error' : ''}`}
                 placeholder="List the specific skills, technologies, or expertise you need (e.g., React, Node.js, AWS, UI/UX design, etc.)"
               />
+              {errors.requiredSkills && (
+                <p className="form-field-error">{errors.requiredSkills.message}</p>
+              )}
             </div>
 
             <div className="form-field form-row-full">
@@ -440,6 +587,14 @@ const ClientForm = () => {
           </Button>
         </div>
       </form>
+
+      {/* Notification */}
+      <Notification
+        type={submitStatus === 'success' ? 'success' : 'error'}
+        message={submitMessage}
+        isVisible={submitStatus !== null}
+        onClose={resetStatus}
+      />
     </div>
   );
 };

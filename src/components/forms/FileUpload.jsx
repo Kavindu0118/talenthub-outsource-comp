@@ -111,7 +111,7 @@ const FileUpload = ({
           </div>
         ) : (
           <div className="file-upload-text-container">
-            <CloudArrowUpIcon className="file-upload-icon" />
+            <CloudArrowUpIcon className="file-upload-icon" style={{ width: '2rem', height: '2rem' }} />
             <div className="file-upload-text">
               <span className="file-upload-link">
                 Click to upload
