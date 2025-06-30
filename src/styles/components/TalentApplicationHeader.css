@@ -1,0 +1,213 @@
+/* Talent Application Header Styles */
+
+.talent-header-section {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  padding: 6rem 1rem 5rem 1rem;
+  text-align: center;
+}
+
+.talent-header-container {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.talent-header-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #1d4ed8;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.talent-header-highlight {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.talent-header-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #64748b;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* Animated Shapes */
+.talent-header-floating-elements {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.talent-header-rect {
+  position: absolute;
+  background: rgba(59, 130, 246, 0.07);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(59, 130, 246, 0.13);
+  border-radius: 0.5rem;
+}
+
+.talent-header-rect-1 {
+  width: 110px;
+  height: 70px;
+  top: 12%;
+  left: 8%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.talent-header-rect-2 {
+  width: 90px;
+  height: 60px;
+  top: 70%;
+  right: 10%;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.talent-header-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.07);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(139, 92, 246, 0.13);
+}
+
+.talent-header-circle-1 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  right: 13%;
+  animation: float 9s ease-in-out infinite;
+}
+
+.talent-header-circle-2 {
+  width: 60px;
+  height: 60px;
+  bottom: 18%;
+  left: 20%;
+  animation: float 11s ease-in-out infinite reverse;
+}
+
+.talent-header-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 60px solid rgba(236, 72, 153, 0.13);
+  top: 35%;
+  left: 18%;
+  animation: rotate 15s linear infinite;
+}
+
+/* Optional: grid background for subtle effect */
+.talent-header-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridMove 18s linear infinite;
+  z-index: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+  66% {
+    transform: translateY(8px) rotate(-4deg);
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0);}
+  100% { transform: translate(48px, 48px);}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .talent-header-title {
+    font-size: 2.1rem;
+  }
+  .talent-header-subtitle {
+    font-size: 1.05rem;
+  }
+  .talent-header-rect, .talent-header-circle, .talent-header-triangle {
+    opacity: 0.7;
+  }
+  .talent-header-rect-1, .talent-header-rect-2 {
+    width: 60px; height: 40px;
+  }
+  .talent-header-circle-1, .talent-header-circle-2 {
+    width: 40px; height: 40px;
+  }
+  .talent-header-triangle {
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 30px solid rgba(236, 72, 153, 0.13);
+  }
+}
+
+@media (max-width: 480px) {
+  .talent-header-title {
+    font-size: 1.3rem;
+  }
+  .talent-header-subtitle {
+    font-size: 0.95rem;
+  }
+  .talent-header-container {
+    padding: 0 0.5rem;
+  }
+}
+/*shapes positioning*/
+.talent-header-icon {
+  position: absolute;
+  opacity: 0.8;
+  animation: float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.talent-header-icon-1 { top: 10%; left: 8%; animation-delay: 0s; }
+.talent-header-icon-2 { top: 65%; right: 10%; animation-delay: 2s; }
+.talent-header-icon-3 { top: 25%; right: 15%; animation-delay: 4s; }
+.talent-header-icon-4 { bottom: 18%; left: 20%; animation-delay: 6s; }
+.talent-header-icon-5 { top: 30%; left: 70%; animation-delay: 1s; }
