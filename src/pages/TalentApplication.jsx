@@ -1,6 +1,6 @@
 import React from 'react';
 import TalentForm from '../components/forms/TalentForm';
-import 'C:/Users/kavin/OneDrive/Desktop/Talent Hub/talenthub-outsource-comp/src/styles/components/TalentApplicationHeader.css';
+import './src/styles/components/TalentApplicationHeader.css';
 
 const TalentApplication = () => {
   return (
