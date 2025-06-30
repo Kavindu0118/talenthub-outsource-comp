@@ -1,6 +1,6 @@
 import React from 'react';
 import TalentForm from '../components/forms/TalentForm';
-import './src/styles/components/TalentApplicationHeader.css';
+import '../styles/components/TalentApplicationHeader.css';
 
 const TalentApplication = () => {
   return (
