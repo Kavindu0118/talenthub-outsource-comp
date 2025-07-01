@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Button = ({ 
   children, 
@@ -46,17 +47,38 @@ const Button = ({
   
   // Render as link if href is provided
   if (href) {
-    return (
-      <a
-        href={href}
-        className={buttonClasses}
-        style={buttonStyles}
-        onClick={onClick}
-        {...props}
-      >
-        {children}
-      </a>
-    );
+    // Check if it's an internal link (starts with /) or external
+    const isInternalLink = href.startsWith('/');
+    
+    if (isInternalLink) {
+      // Use React Router Link for internal navigation
+      return (
+        <Link
+          to={href}
+          className={buttonClasses}
+          style={buttonStyles}
+          onClick={onClick}
+          {...props}
+        >
+          {children}
+        </Link>
+      );
+    } else {
+      // Use regular anchor tag for external links
+      return (
+        <a
+          href={href}
+          className={buttonClasses}
+          style={buttonStyles}
+          onClick={onClick}
+          target="_blank"
+          rel="noopener noreferrer"
+          {...props}
+        >
+          {children}
+        </a>
+      );
+    }
   }
   
   return (
