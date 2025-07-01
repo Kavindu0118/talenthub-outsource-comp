@@ -21,7 +21,7 @@ body {
   .btn-primary:hover {
     background-color: rgba(37, 99, 235, 0.9);
   }
-  /* Secondary Button Styles for role cards*/
+  
   .btn-role-card {
     background-color: #25eb6a;
     color: white;
@@ -35,10 +35,10 @@ body {
   .btn-role-card:hover {
     background-color: rgba(37, 99, 235, 0.9);
   }
-  
+
   .btn-secondary {
-    background-color: #059669;
-    color: white;
+    background-color: white;
+    color: #2563eb;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     font-weight: 500;
@@ -48,6 +48,7 @@ body {
   .btn-secondary:hover {
     background-color: rgba(5, 150, 105, 0.9);
   }
+  
   
   .btn-outline {
     border: 2px solid #2563eb;

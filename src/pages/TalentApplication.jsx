@@ -8,7 +8,11 @@ const TalentApplication = () => {
       {/* Header Section */}
       
       <section className="talent-header-section" style={{
-    background: 'linear-gradient(135deg, #f0f7ff 0%, #f9fafb 60%, #e0e7ff 100%)'}}>
+        minHeight: '100vh', // Increase header height (adjust as needed, e.g. 80vh or 100vh for full screen)
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #f0f7ff 0%, #f9fafb 60%, #e0e7ff 100%)'}}>
         <div className="talent-header-grid"></div>
         <div className="talent-header-floating-elements">
           {/* Graduation Cap Icon */}
@@ -81,10 +85,9 @@ const TalentApplication = () => {
 
       {/* Application Form */}
       <section className="py-12 px-4 max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">Application Form</h2>
-          <TalentForm />
-        </div>
+          <div className="talent-form-container">
+            <TalentForm />
+          </div>
       </section>
     </div>
   );
