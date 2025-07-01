@@ -10,11 +10,6 @@ import {
   DocumentTextIcon
 } from '@heroicons/react/24/outline';
 
-<<<<<<< Updated upstream
-import '../../styles/globals.css';
-=======
-
->>>>>>> Stashed changes
 
 const RoleCards = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
