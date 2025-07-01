@@ -10,7 +10,11 @@ import {
   DocumentTextIcon
 } from '@heroicons/react/24/outline';
 
+<<<<<<< Updated upstream
 import '../../styles/globals.css';
+=======
+
+>>>>>>> Stashed changes
 
 const RoleCards = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -195,9 +199,30 @@ const RoleCards = () => {
                     {role.experience}
                   </span>
                   {/* apply & hire buttons */}
-                  
-                  <button class="btn-role-card">  Apply </button>
-                  <button class="btn-role-card">  Hire </button>
+                   
+                  <button className="btn btn-primary"
+                  style={{
+                    minWidth: '100px',
+                    height: '48px',
+                    fontSize: '1rem',
+                    padding: '0.5rem 1.5rem',
+                    marginRight: '0.5rem'
+                  }}
+                  >
+                    Apply Now
+                  </button>
+                  <button className="btn btn-primary"
+                  style={{
+                    minWidth: '100px',
+                    height: '48px',
+                    fontSize: '1rem',
+                    padding: '0.5rem 1.5rem',
+                    marginRight: '0.5rem'
+                  }}
+                  >
+                    Hire Talent
+                  </button>
+                 
                 </div> 
               </div>
             </div>
