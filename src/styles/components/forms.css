@@ -397,12 +397,24 @@
 .form-field-select.error,
 .form-field-textarea.error {
   border-color: #dc2626;
+  border-width: 2px;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  background-color: rgba(254, 242, 242, 0.5);
 }
 
 .form-field-error {
   color: #dc2626;
   font-size: 0.875rem;
   margin-top: 0.25rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.form-field-error::before {
+  content: "⚠️";
+  font-size: 0.75rem;
 }
 
 .form-field-textarea {

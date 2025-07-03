@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../common/Button';
 import FileUpload from './FileUpload';
 import LoadingSpinner from '../common/LoadingSpinner';
+import Notification from '../common/Notification';
 import { validateEmail, validatePhone, validateRequired } from '../../utils/validation';
 import { useFormSubmission } from '../../hooks/useFormSubmission';
 
 const TalentForm = () => {
   const [resumeFile, setResumeFile] = useState(null);
-  const { isSubmitting, submitForm } = useFormSubmission();
+  const [showValidationError, setShowValidationError] = useState(false);
+  const { isSubmitting, submitStatus, submitMessage, submitForm, resetStatus } = useFormSubmission('talent');
   
   const {
     register,
@@ -18,18 +20,63 @@ const TalentForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    console.log('🎯 TalentForm onSubmit called with data:', data);
+    
+    // Check if resume is uploaded
+    if (!resumeFile) {
+      console.warn('❌ No resume file uploaded');
+      alert('Please upload your resume before submitting the form.');
+      return;
+    }
+
+    console.log('📄 Resume file:', resumeFile);
+
     const formData = {
       ...data,
       resume: resumeFile,
       type: 'talent_application'
     };
 
-    const success = await submitForm(formData, 'TALENT_TEMPLATE');
-    if (success) {
+    console.log('📋 Final form data to submit:', formData);
+
+    const result = await submitForm(formData);
+    console.log('📤 Submit form result:', result);
+    
+    if (result.success) {
+      console.log('✅ Form submitted successfully, resetting form...');
       reset();
       setResumeFile(null);
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        resetStatus();
+      }, 5000);
+    } else {
+      console.error('❌ Form submission failed:', result);
     }
   };
+
+  // Handle form submission with validation check
+  const handleFormSubmit = (data, event) => {
+    // If there are validation errors, show a notification
+    if (Object.keys(errors).length > 0) {
+      setShowValidationError(true);
+      // Auto-hide error message after 5 seconds
+      setTimeout(() => {
+        setShowValidationError(false);
+      }, 5000);
+      return;
+    }
+    
+    // Call the original onSubmit function
+    onSubmit(data, event);
+  };
+
+  // Hide validation error when errors are fixed
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      setShowValidationError(false);
+    }
+  }, [errors]);
 
   const skillsOptions = [
     'JavaScript', 'React', 'Node.js', 'Python', 'Java', 'C#', '.NET',
@@ -51,11 +98,45 @@ const TalentForm = () => {
       <div className="form-header">
         <h2 className="form-title">Join Our Talent Network</h2>
         <p className="form-description">
-          Ready to take your career to the next level? Submit your application and connect with top companies worldwide.
+          Ready to take your career to the next level? Submit your application and we'll add you to our talent network to connect with top companies worldwide.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+      <form onSubmit={handleSubmit(handleFormSubmit)} className="form-container">
+        {/* Validation Errors Summary */}
+        {Object.keys(errors).length > 0 && (
+          <div className="form-errors-summary">
+            <h4>⚠️ Please fix the following errors:</h4>
+            <ul>
+              {Object.entries(errors).map(([field, error]) => {
+                // Make field names more user-friendly
+                const fieldNames = {
+                  firstName: 'First Name',
+                  lastName: 'Last Name',
+                  email: 'Email Address',
+                  phone: 'Phone Number',
+                  location: 'Location',
+                  jobTitle: 'Job Title',
+                  experienceLevel: 'Experience Level',
+                  skills: 'Skills',
+                  minRate: 'Minimum Rate',
+                  maxRate: 'Maximum Rate',
+                  availability: 'Availability',
+                  portfolio: 'Portfolio',
+                  bio: 'Bio'
+                };
+                const friendlyFieldName = fieldNames[field] || field;
+                
+                return (
+                  <li key={field}>
+                    <strong>{friendlyFieldName}:</strong> {error.message}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
         {/* Personal Information */}
         <div className="form-section">
           <h3 className="form-section-title">Personal Information</h3>
@@ -105,7 +186,15 @@ const TalentForm = () => {
               <input
                 type="email"
                 {...register('email', { 
-                  validate: validateEmail
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Email is required';
+                    }
+                    if (!validateEmail(value)) {
+                      return 'Please enter a valid email address';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-input ${
                   errors.email ? 'error' : ''
@@ -124,7 +213,15 @@ const TalentForm = () => {
               <input
                 type="tel"
                 {...register('phone', { 
-                  validate: validatePhone
+                  validate: (value) => {
+                    if (!validateRequired(value)) {
+                      return 'Phone number is required';
+                    }
+                    if (!validatePhone(value)) {
+                      return 'Please enter a valid phone number';
+                    }
+                    return true;
+                  }
                 })}
                 className={`form-field-input ${
                   errors.phone ? 'error' : ''
@@ -365,6 +462,24 @@ const TalentForm = () => {
             {isSubmitting ? <LoadingSpinner size="sm" /> : 'Submit Application'}
           </Button>
         </div>
+
+        {/* Status Messages */}
+        {submitStatus && (
+          <Notification
+            type={submitStatus}
+            message={submitMessage}
+            onClose={resetStatus}
+          />
+        )}
+
+        {/* Validation Error Notification */}
+        {showValidationError && (
+          <Notification
+            type="error"
+            message="⚠️ Please fix all validation errors before submitting the form."
+            onClose={() => setShowValidationError(false)}
+          />
+        )}
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFormSubmission } from '../../hooks/useFormSubmission';
 import LoadingSpinner from '../common/LoadingSpinner';
+import Notification from '../common/Notification';
 
 const ProjectRequestForm = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const ProjectRequestForm = () => {
     additionalInfo: ''
   });
 
-  const { submitForm, isSubmitting, submitStatus } = useFormSubmission();
+  const { submitForm, isSubmitting, submitStatus, submitMessage, resetStatus } = useFormSubmission();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -73,12 +74,13 @@ const ProjectRequestForm = () => {
     const submissionData = {
       ...formData,
       formType: 'project-request',
+      type: 'project-request',
       submittedAt: new Date().toISOString()
     };
 
-    await submitForm(submissionData);
+    const result = await submitForm(submissionData);
     
-    if (submitStatus === 'success') {
+    if (result.success) {
       // Reset form on successful submission
       setFormData({
         name: '',
@@ -99,6 +101,11 @@ const ProjectRequestForm = () => {
         designFiles: null,
         additionalInfo: ''
       });
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        resetStatus();
+      }, 5000);
     }
   };
 
@@ -434,10 +441,13 @@ const ProjectRequestForm = () => {
           </p>
         </div>
 
-        {submitStatus === 'error' && (
-          <div className="error-message">
-            There was an error submitting your request. Please try again or contact us directly.
-          </div>
+        {/* Status Messages */}
+        {submitStatus && (
+          <Notification
+            type={submitStatus}
+            message={submitMessage}
+            onClose={resetStatus}
+          />
         )}
       </form>
     </div>

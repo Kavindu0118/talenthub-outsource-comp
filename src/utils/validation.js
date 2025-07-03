@@ -82,8 +82,14 @@ export const validateFile = (file, maxSize = 5 * 1024 * 1024, allowedTypes = [])
 export const validateTalentForm = (formData) => {
   const errors = {};
   
-  if (!validateRequired(formData.fullName)) {
-    errors.fullName = 'Full name is required';
+  
+  // Personal Information
+  if (!validateRequired(formData.firstName)) {
+    errors.firstName = 'First name is required';
+  }
+  
+  if (!validateRequired(formData.lastName)) {
+    errors.lastName = 'Last name is required';
   }
   
   if (!validateRequired(formData.email)) {
@@ -92,18 +98,44 @@ export const validateTalentForm = (formData) => {
     errors.email = 'Please enter a valid email address';
   }
   
-  if (formData.phone && !validatePhone(formData.phone)) {
+  if (!validateRequired(formData.phone)) {
+    errors.phone = 'Phone number is required';
+  } else if (!validatePhone(formData.phone)) {
     errors.phone = 'Please enter a valid phone number';
+  }
+  
+  if (!validateRequired(formData.location)) {
+    errors.location = 'Location is required';
+  }
+  
+  // Professional Information
+  if (!validateRequired(formData.jobTitle)) {
+    errors.jobTitle = 'Job title is required';
+  }
+  
+  if (!validateRequired(formData.experienceLevel)) {
+    errors.experienceLevel = 'Experience level is required';
   }
   
   if (!formData.skills || formData.skills.length === 0) {
     errors.skills = 'Please select at least one skill';
   }
   
-  if (!validateRequired(formData.experience)) {
-    errors.experience = 'Experience level is required';
+  // Rate Information
+  if (!validateRequired(formData.minRate)) {
+    errors.minRate = 'Minimum rate is required';
   }
   
+  if (!validateRequired(formData.maxRate)) {
+    errors.maxRate = 'Maximum rate is required';
+  }
+  
+  // Availability
+  if (!validateRequired(formData.availability)) {
+    errors.availability = 'Availability is required';
+  }
+  
+  // Resume validation
   if (formData.resume) {
     const fileErrors = validateFile(
       formData.resume,
@@ -113,7 +145,11 @@ export const validateTalentForm = (formData) => {
     if (fileErrors.length > 0) {
       errors.resume = fileErrors[0];
     }
+  } else {
+    errors.resume = 'Resume is required';
   }
+  
+  console.log('Talent validation errors:', errors);
   
   return errors;
 };
@@ -178,7 +214,6 @@ export const validateClientForm = (formData) => {
 export const validateHireForm = (formData) => {
   const errors = {};
   
-  console.log('Validating hire form data:', formData); // Debug log
   
   // Company Information
   if (!validateRequired(formData.companyName)) {
