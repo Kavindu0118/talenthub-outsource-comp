@@ -265,7 +265,7 @@ const OurRoles = () => {
                   <Button 
                     variant="primary" 
                     size="sm"
-                    href="/TalentApplication"
+                    href="/talent-application"
                   >
                     Apply Now
                   </Button>
@@ -274,7 +274,7 @@ const OurRoles = () => {
                     size="sm"
                     href="/hire-with-us"
                   >
-                    Hire Now
+                    Hire Talent
                   </Button>
                 </div>
               </div>

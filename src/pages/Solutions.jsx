@@ -15,7 +15,38 @@ import Button from '../components/common/Button';
 import '../styles/components/solutions.css';
 
 const Solutions = () => {
-    const services = [
+  // Smooth scroll function for internal links
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  // Handle email opening
+  const handleEmailQuote = () => {
+    const subject = encodeURIComponent('Project Quote Request');
+    const body = encodeURIComponent(`Hello,
+
+I'm interested in getting a quote for my project. Here are some details:
+
+Project Type: 
+Timeline: 
+Budget Range: 
+Description: 
+
+Please let me know if you need any additional information.
+
+Best regards,`);
+    
+    window.location.href = `mailto:isurulakmalid13@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const services = [
     {
       icon: <CodeBracketIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Web Development',
@@ -156,7 +187,7 @@ const Solutions = () => {
                   variant="primary" 
                   size="lg" 
                   className="btn-primary"
-                  href="#get-quote"
+                  onClick={handleEmailQuote}
                   style={{ backgroundColor: '#3b82f6', color: 'white' }}
                 >
                   Get Free Quote
@@ -165,11 +196,12 @@ const Solutions = () => {
                   variant="outline" 
                   size="lg" 
                   className="cta-button-secondary"
-                  href="#our-process"
+                  onClick={(e) => handleSmoothScroll(e, 'our-process')}
                   style={{ 
                     borderColor: '#3b82f6', 
                     color: '#3b82f6',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    cursor: 'pointer'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#3b82f6';

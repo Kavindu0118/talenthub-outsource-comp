@@ -13,6 +13,18 @@ import Button from '../components/common/Button';
 import '../styles/components/hirewithus.css';
 
 const HireWithUs = () => {
+  // Smooth scroll function for internal links
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   const benefits = [
     {
       icon: <ClockIcon style={{height: '2rem', width: '2rem'}} />,
@@ -146,7 +158,7 @@ const HireWithUs = () => {
                   variant="primary" 
                   size="lg" 
                   className="btn-primary"
-                  href="#get-started"
+                  onClick={(e) => handleSmoothScroll(e, 'get-started')}
                   style={{ backgroundColor: '#3b82f6', color: 'white' }}
                 >
                   Get Started Now
@@ -155,11 +167,12 @@ const HireWithUs = () => {
                   variant="outline" 
                   size="lg" 
                   className="cta-button-secondary"
-                  href="#how-it-works"
+                  onClick={(e) => handleSmoothScroll(e, 'how-it-works')}
                   style={{ 
                     borderColor: '#3b82f6', 
                     color: '#3b82f6',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    cursor: 'pointer'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#3b82f6';

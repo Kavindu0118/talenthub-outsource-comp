@@ -9,6 +9,7 @@ import {
   MegaphoneIcon,
   DocumentTextIcon
 } from '@heroicons/react/24/outline';
+import Button from '../common/Button';
 
 
 const RoleCards = () => {
@@ -195,28 +196,34 @@ const RoleCards = () => {
                   </span>
                   {/* apply & hire buttons */}
                    
-                  <button className="btn btn-primary"
-                  style={{
-                    minWidth: '100px',
-                    height: '48px',
-                    fontSize: '1rem',
-                    padding: '0.5rem 1.5rem',
-                    marginRight: '0.5rem'
-                  }}
+                  <Button 
+                    variant="primary"
+                    size="sm"
+                    href="/talent-application"
+                    style={{
+                      minWidth: '100px',
+                      height: '48px',
+                      fontSize: '1rem',
+                      padding: '0.5rem 1.5rem',
+                      marginRight: '0.5rem'
+                    }}
                   >
                     Apply Now
-                  </button>
-                  <button className="btn btn-primary"
-                  style={{
-                    minWidth: '100px',
-                    height: '48px',
-                    fontSize: '1rem',
-                    padding: '0.5rem 1.5rem',
-                    marginRight: '0.5rem'
-                  }}
+                  </Button>
+                  <Button 
+                    variant="primary"
+                    size="sm"
+                    href="/hire-with-us"
+                    style={{
+                      minWidth: '100px',
+                      height: '48px',
+                      fontSize: '1rem',
+                      padding: '0.5rem 1.5rem',
+                      marginRight: '0.5rem'
+                    }}
                   >
                     Hire Talent
-                  </button>
+                  </Button>
                  
                 </div> 
               </div>
