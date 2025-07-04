@@ -12,7 +12,7 @@ class TalentGoogleSheetsService {
     console.log('Form data received:', formData);
     console.log('Script URL:', this.scriptUrl);
     
-    if (!this.scriptUrl || this.scriptUrl === 'your_talent_web_app_url_here') {
+    if (!this.scriptUrl || this.scriptUrl === 'https://script.google.com/macros/s/AKfycbyQmTZqg071NdZzFSj7TI-XTtkoVuw4e1c0o_0ASGMlCRrVs8W2ycv9jyz39QItOHgkRw/exec') {
       console.warn('Talent Google Apps Script URL not configured. Skipping Google Sheets save.');
       return this.logToConsole(formData);
     }

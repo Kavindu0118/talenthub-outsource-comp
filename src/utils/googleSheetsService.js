@@ -8,7 +8,7 @@ class GoogleSheetsService {
 
   // Save HireWithUs form data to Google Sheets
   async saveHireFormData(formData) {
-    if (!this.scriptUrl || this.scriptUrl === 'your_web_app_url_here') {
+    if (!this.scriptUrl || this.scriptUrl === 'https://script.google.com/macros/s/AKfycbwQoopux9COimFOvBvmuGh_ExVqMMpQybB9DyqvDW3wmLGXlf4zwb_Y7NegYT-uzjZl/exec') {
       console.warn('Google Apps Script URL not configured. Skipping Google Sheets save.');
       return this.logToConsole(formData);
     }

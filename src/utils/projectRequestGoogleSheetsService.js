@@ -12,7 +12,7 @@ class ProjectRequestGoogleSheetsService {
     console.log('Form data received:', formData);
     console.log('Script URL:', this.scriptUrl);
     
-    if (!this.scriptUrl || this.scriptUrl === 'your_project_request_web_app_url_here') {
+    if (!this.scriptUrl || this.scriptUrl === 'https://script.google.com/macros/s/AKfycby19h6UqYmKhH7EYJRbHhIL1G_FZNe0rrwByy-HfTULfZuT26puQt5G5cHkd00vWKZwcA/exec') {
       console.warn('Project Request Google Apps Script URL not configured. Skipping Google Sheets save.');
       return this.logToConsole(formData);
     }
