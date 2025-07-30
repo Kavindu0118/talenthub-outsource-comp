@@ -468,6 +468,7 @@ const TalentForm = () => {
           <Notification
             type={submitStatus}
             message={submitMessage}
+            isVisible={!!submitStatus}
             onClose={resetStatus}
           />
         )}
@@ -477,6 +478,7 @@ const TalentForm = () => {
           <Notification
             type="error"
             message="⚠️ Please fix all validation errors before submitting the form."
+            isVisible={showValidationError}
             onClose={() => setShowValidationError(false)}
           />
         )}

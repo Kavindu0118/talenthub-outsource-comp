@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { sendClientRequest } from '../utils/emailService';
-import { sendHireFormEmail, sendHireFormEmailAlternative } from '../utils/hireEmailService';
 import { validateTalentForm, validateClientForm, validateHireForm } from '../utils/validation';
 import { saveToGoogleSheets } from '../utils/googleSheetsService';
 import { saveToTalentGoogleSheets } from '../utils/talentGoogleSheetsService';
@@ -44,53 +42,28 @@ export const useFormSubmission = (formType) => {
       let result;
       
       if (templateType === 'CLIENT_TEMPLATE' || formData.type === 'client_inquiry') {
-        // This is a hire/client request form
+        // This is a hire/client request form - save to Google Sheets only
+        console.log('🎯 Processing hire/client request - saving to Google Sheets only...');
+        console.log('📝 Form data to be submitted:', formData);
         try {
-          result = await sendHireFormEmail(formData);
+          const sheetsResult = await saveToGoogleSheets(formData);
+          console.log('📊 Hire/Client Google Sheets save result:', sheetsResult);
           
-          // Fallback to alternative method if EmailJS fails
-          if (!result.success) {
-            console.warn('EmailJS failed, using alternative method:', result.error);
-            result = await sendHireFormEmailAlternative(formData);
-          }
-
-          // If email was sent successfully, save to Google Sheets
-          if (result.success) {
-            console.log('Email sent successfully, now saving to Google Sheets...');
-            try {
-              const sheetsResult = await saveToGoogleSheets(formData);
-              console.log('Google Sheets save result:', sheetsResult);
-              
-              // Add Google Sheets status to result
-              result.googleSheets = sheetsResult;
-            } catch (sheetsError) {
-              console.warn('Google Sheets save failed, but email was sent:', sheetsError);
-              // Don't fail the whole submission if Google Sheets fails
-              result.googleSheets = { 
-                success: false, 
-                error: sheetsError.message || 'Failed to save to Google Sheets' 
-              };
-            }
-          }
+          result = {
+            success: sheetsResult.success,
+            message: sheetsResult.success 
+              ? 'Your request has been submitted successfully!' 
+              : 'Failed to submit request',
+            googleSheets: sheetsResult
+          };
+          
+          console.log('✅ Final result for hire/client submission:', result);
         } catch (error) {
-          console.warn('Primary email service failed, using alternative:', error);
-          result = await sendHireFormEmailAlternative(formData);
-          
-          // If alternative email was sent successfully, save to Google Sheets
-          if (result.success) {
-            console.log('Alternative email sent successfully, now saving to Google Sheets...');
-            try {
-              const sheetsResult = await saveToGoogleSheets(formData);
-              console.log('Google Sheets save result:', sheetsResult);
-              result.googleSheets = sheetsResult;
-            } catch (sheetsError) {
-              console.warn('Google Sheets save failed, but email was sent:', sheetsError);
-              result.googleSheets = { 
-                success: false, 
-                error: sheetsError.message || 'Failed to save to Google Sheets' 
-              };
-            }
-          }
+          console.error('❌ Hire/Client Google Sheets service failed:', error);
+          result = { 
+            success: false, 
+            error: error.message || 'Failed to submit request'
+          };
         }
       } else if (formType === 'talent') {
         // This is a talent application form - save directly to Google Sheets
@@ -117,34 +90,35 @@ export const useFormSubmission = (formType) => {
           };
         }
       } else if (formData.formType === 'project-request' || formData.type === 'project-request') {
-        // This is a project request form
+        // This is a project request form - save to Google Sheets only
+        console.log('🎯 Processing project request - saving to Google Sheets only...');
+        console.log('📝 Form data to be submitted:', formData);
+        console.log('🔍 Form type check - formData.formType:', formData.formType);
+        console.log('🔍 Form type check - formData.type:', formData.type);
         try {
-          result = await sendClientRequest(formData);
+          const sheetsResult = await saveToProjectRequestGoogleSheets(formData);
+          console.log('📊 Project Request Google Sheets save result:', sheetsResult);
           
-          // If email was sent successfully, save to Project Request Google Sheets
-          if (result.success) {
-            console.log('Project request email sent successfully, now saving to Google Sheets...');
-            try {
-              const sheetsResult = await saveToProjectRequestGoogleSheets(formData);
-              console.log('Project Request Google Sheets save result:', sheetsResult);
-              
-              // Add Google Sheets status to result
-              result.googleSheets = sheetsResult;
-            } catch (sheetsError) {
-              console.warn('Project Request Google Sheets save failed, but email was sent:', sheetsError);
-              // Don't fail the whole submission if Google Sheets fails
-              result.googleSheets = { 
-                success: false, 
-                error: sheetsError.message || 'Failed to save project request to Google Sheets' 
-              };
-            }
-          }
+          result = {
+            success: sheetsResult.success,
+            message: sheetsResult.success 
+              ? 'Your project request has been submitted successfully!' 
+              : 'Failed to submit project request',
+            googleSheets: sheetsResult
+          };
+          
+          console.log('✅ Final result for project request submission:', result);
         } catch (error) {
-          console.error('Project request email service failed:', error);
-          result = { success: false, error: error.message };
+          console.error('❌ Project Request Google Sheets service failed:', error);
+          result = { 
+            success: false, 
+            error: error.message || 'Failed to submit project request'
+          };
         }
       } else {
-        result = await sendClientRequest(formData);
+        // Fallback for any other form types - should not reach here
+        console.warn('Unknown form type, skipping submission');
+        result = { success: false, error: 'Unknown form type' };
       }
 
       if (result.success) {
@@ -156,9 +130,9 @@ export const useFormSubmission = (formType) => {
           // Add Google Sheets status to message if available
           if (result.googleSheets) {
             if (result.googleSheets.success) {
-              console.log('✅ Form data saved to both email and Google Sheets');
+              console.log('✅ Form data saved to Google Sheets successfully');
             } else {
-              console.warn('⚠️ Email sent but Google Sheets save failed:', result.googleSheets.error);
+              console.warn('⚠️ Google Sheets save failed:', result.googleSheets.error);
             }
           }
           
@@ -171,9 +145,9 @@ export const useFormSubmission = (formType) => {
           // Add Google Sheets status to message if available
           if (result.googleSheets) {
             if (result.googleSheets.success) {
-              console.log('✅ Project request saved to both email and Google Sheets');
+              console.log('✅ Project request saved to Google Sheets successfully');
             } else {
-              console.warn('⚠️ Project request email sent but Google Sheets save failed:', result.googleSheets.error);
+              console.warn('⚠️ Project request Google Sheets save failed:', result.googleSheets.error);
             }
           }
           

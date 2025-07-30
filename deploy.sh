@@ -4,10 +4,10 @@
 
 echo "🚀 Starting deployment process..."
 
-# Check if EmailJS is configured
+# Check if Google Sheets is configured
 if [ ! -f ".env" ]; then
-    echo "⚠️  Warning: .env file not found. EmailJS will not work without configuration."
-    echo "   Please copy .env.example to .env and configure your EmailJS credentials."
+    echo "⚠️  Warning: .env file not found. Google Sheets integration will not work without configuration."
+    echo "   Please copy .env.example to .env and configure your Google Sheets URLs."
 fi
 
 # Install dependencies
@@ -28,7 +28,7 @@ if [ $? -eq 0 ]; then
     echo "   - GitHub Pages: push to repository and enable GitHub Pages"
     echo ""
     echo "📋 Don't forget to:"
-    echo "   1. Configure EmailJS credentials in your hosting platform"
+    echo "   1. Configure Google Sheets URLs in your hosting platform"
     echo "   2. Set up custom domain (optional)"
     echo "   3. Configure SSL certificate"
 else

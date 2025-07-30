@@ -51,7 +51,7 @@ class ProjectRequestGoogleSheetsService {
         throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
       }
 
-      // Send data to Google Apps Script - use simple JSON format
+      // Send data to Google Apps Script - try normal request first, fallback to no-cors
       let requestOptions = {
         method: 'POST',
         headers: {
@@ -63,27 +63,51 @@ class ProjectRequestGoogleSheetsService {
       console.log('Request options:', requestOptions);
       console.log('🚀 Sending request to Google Apps Script...');
 
-      // Try the request
-      const response = await fetch(this.scriptUrl, requestOptions);
-      console.log('Project request response status:', response.status);
-      console.log('Project request response type:', response.type);
+      try {
+        // First attempt: normal request
+        const response = await fetch(this.scriptUrl, requestOptions);
+        console.log('Project request response status:', response.status);
+        console.log('Project request response type:', response.type);
 
-      if (response.ok) {
-        const responseText = await response.text();
-        console.log('Raw response text:', responseText);
+        if (response.ok) {
+          const responseText = await response.text();
+          console.log('Raw response text:', responseText);
+          
+          let result = JSON.parse(responseText);
+          console.log('Parsed result:', result);
+          
+          return {
+            success: result.success || false,
+            message: result.message || 'Project request processed',
+            timestamp: result.timestamp || new Date().toISOString(),
+            clientName: result.clientName || sheetData.name,
+            rawResponse: result
+          };
+        } else {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+      } catch (corsError) {
+        console.log('CORS request failed, trying no-cors mode:', corsError.message);
         
-        let result = JSON.parse(responseText);
-        console.log('Parsed result:', result);
+        // Fallback: no-cors mode
+        requestOptions.mode = 'no-cors';
+        const noCorsResponse = await fetch(this.scriptUrl, requestOptions);
         
-        return {
-          success: result.success || false,
-          message: result.message || 'Project request processed',
-          timestamp: result.timestamp || new Date().toISOString(),
-          clientName: result.clientName || sheetData.name,
-          rawResponse: result
-        };
-      } else {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        console.log('No-cors response type:', noCorsResponse.type);
+        
+        // With no-cors, we can't read the response, so assume success if no error thrown
+        if (noCorsResponse.type === 'opaque') {
+          console.log('No-cors request completed - assuming success');
+          return {
+            success: true,
+            message: 'Project request submitted (no-cors mode)',
+            timestamp: new Date().toISOString(),
+            clientName: sheetData.name,
+            note: 'Response verification limited due to CORS restrictions'
+          };
+        } else {
+          throw new Error('No-cors request failed');
+        }
       }
 
     } catch (error) {

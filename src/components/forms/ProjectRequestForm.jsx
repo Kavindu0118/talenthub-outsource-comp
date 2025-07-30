@@ -102,31 +102,12 @@ const ProjectRequestForm = () => {
         additionalInfo: ''
       });
       
-      // Auto-hide success message after 5 seconds
-      setTimeout(() => {
-        resetStatus();
-      }, 5000);
+      // Don't auto-hide success message - let user close it manually
+      // setTimeout(() => {
+      //   resetStatus();
+      // }, 5000);
     }
   };
-
-  if (submitStatus === 'success') {
-    return (
-      <div className="form-container">
-        <div className="success-message">
-          <div className="success-icon">✓</div>
-          <h3>Project Request Submitted Successfully!</h3>
-          <p>Thank you for your interest in our software development services. Our team will review your requirements and get back to you within 24 hours with a detailed proposal.</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="btn btn-primary"
-            style={{marginTop: '1rem'}}
-          >
-            Submit Another Request
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="form-container">
@@ -446,6 +427,7 @@ const ProjectRequestForm = () => {
           <Notification
             type={submitStatus}
             message={submitMessage}
+            isVisible={!!submitStatus}
             onClose={resetStatus}
           />
         )}

@@ -12,7 +12,7 @@ class TalentGoogleSheetsService {
     console.log('Form data received:', formData);
     console.log('Script URL:', this.scriptUrl);
     
-    if (!this.scriptUrl || this.scriptUrl === 'https://script.google.com/macros/s/AKfycbyQmTZqg071NdZzFSj7TI-XTtkoVuw4e1c0o_0ASGMlCRrVs8W2ycv9jyz39QItOHgkRw/exec') {
+    if (!this.scriptUrl) {
       console.warn('Talent Google Apps Script URL not configured. Skipping Google Sheets save.');
       return this.logToConsole(formData);
     }
@@ -49,15 +49,13 @@ class TalentGoogleSheetsService {
         throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
       }
 
-      // Send data to Google Apps Script with additional debugging
+      // Send data to Google Apps Script with proper CORS handling
       const requestOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(sheetData),
-        mode: 'no-cors', // Use no-cors to bypass CORS issues
-        credentials: 'omit'
+        body: JSON.stringify(sheetData)
       };
 
       console.log('Request options:', requestOptions);
@@ -68,19 +66,6 @@ class TalentGoogleSheetsService {
       console.log('Talent response status:', response.status);
       console.log('Talent response statusText:', response.statusText);
       console.log('Talent response type:', response.type);
-
-      // Handle no-cors response (opaque response)
-      if (response.type === 'opaque') {
-        console.log('Received opaque response (no-cors mode) - assuming success');
-        return {
-          success: true,
-          message: 'Your talent application has been submitted successfully!',
-          timestamp: new Date().toISOString(),
-          applicantName: `${sheetData.firstName} ${sheetData.lastName}`
-        };
-      }
-
-      console.log('Talent response headers:', Object.fromEntries(response.headers.entries()));
 
       // Try to get response text first for better error debugging
       const responseText = await response.text();
