@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { validateTalentForm, validateClientForm, validateHireForm } from '../utils/validation';
-import { saveToGoogleSheets } from '../utils/googleSheetsService';
+import { saveToGoogleSheets } from '../utils/hirewithUsGoogleSheet';
 import { saveToTalentGoogleSheets } from '../utils/talentGoogleSheetsService';
 import { saveToProjectRequestGoogleSheets } from '../utils/projectRequestGoogleSheetsService';
 
