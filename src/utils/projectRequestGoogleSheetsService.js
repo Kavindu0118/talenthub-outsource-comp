@@ -51,40 +51,76 @@ class ProjectRequestGoogleSheetsService {
         throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
       }
 
-      // Send data to Google Apps Script - use simple JSON format
-      let requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(sheetData)
-      };
-
-      console.log('Request options:', requestOptions);
-      console.log('🚀 Sending request to Google Apps Script...');
-
-      // Try the request
-      const response = await fetch(this.scriptUrl, requestOptions);
-      console.log('Project request response status:', response.status);
-      console.log('Project request response type:', response.type);
-
-      if (response.ok) {
-        const responseText = await response.text();
-        console.log('Raw response text:', responseText);
+      // Try the request with different approaches for CORS handling (same as hire form)
+      let response;
+      
+      try {
+        // First attempt: CORS-friendly request with redirect follow
+        console.log('Attempting CORS-friendly request...');
+        response = await fetch(this.scriptUrl, {
+          redirect: "follow",
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(sheetData)
+        });
+      } catch (corsError) {
+        console.warn('Standard CORS request failed:', corsError);
         
-        let result = JSON.parse(responseText);
-        console.log('Parsed result:', result);
-        
-        return {
-          success: result.success || false,
-          message: result.message || 'Project request processed',
-          timestamp: result.timestamp || new Date().toISOString(),
-          clientName: result.clientName || sheetData.name,
-          rawResponse: result
-        };
-      } else {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        // Second attempt: Try with no-cors mode (will limit response access)
+        console.log('Attempting no-cors request...');
+        try {
+          response = await fetch(this.scriptUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sheetData),
+            mode: 'no-cors'
+          });
+          
+          // With no-cors, we can't read the response, so assume success if no error
+          if (response.type === 'opaque') {
+            console.log('No-cors request completed (response opaque)');
+            return {
+              success: true,
+              message: 'Project request sent successfully (no-cors mode)',
+              method: 'no-cors'
+            };
+          }
+        } catch (noCorsError) {
+          console.error('No-cors request also failed:', noCorsError);
+          throw corsError; // Throw the original CORS error
+        }
       }
+
+      console.log('Project request response status:', response.status);
+      console.log('Project request response headers:', Object.fromEntries(response.headers.entries()));
+
+      if (!response.ok) {
+        const responseText = await response.text();
+        console.error('Project request response error details:', responseText);
+        throw new Error(`HTTP error! status: ${response.status}, details: ${responseText}`);
+      }
+
+      const result = await response.json();
+      console.log('Project request Google Apps Script response:', result);
+        
+        if (result.status === "success") {
+          console.log('✅ Project request saved to Google Sheets successfully:', result);
+          return {
+            success: true,
+            message: result.message || 'Project request processed successfully',
+            timestamp: result.timestamp,
+            clientName: result.clientName,
+            spreadsheetUrl: result.spreadsheetUrl,
+            rowNumber: result.rowNumber
+          };
+        } else {
+          console.error('Google Apps Script returned error:', result);
+          throw new Error(result.message || 'Failed to save project request');
+        }
 
     } catch (error) {
       console.error('❌ Failed to save project request to Google Sheets:', error);

@@ -3,14 +3,15 @@
 
 class TalentGoogleSheetsService {
   constructor() {
-    this.scriptUrl = import.meta.env.VITE_TALENT_GOOGLE_SCRIPT_URL;
+    this.scriptUrl = import.meta.env.VITE_APPLYAS_TALENT_GOOGLE_SCRIPT_URL;
   }
 
   // Save Talent application form data to Google Sheets
   async saveTalentFormData(formData) {
     console.log('🚀 Starting talent form submission...');
     console.log('Form data received:', formData);
-    console.log('Script URL:', this.scriptUrl);
+    console.log('Script URL from env:', import.meta.env.VITE_TALENT_GOOGLE_SCRIPT_URL);
+    console.log('Script URL (this.scriptUrl):', this.scriptUrl);
     
     if (!this.scriptUrl) {
       console.warn('Talent Google Apps Script URL not configured. Skipping Google Sheets save.');
@@ -49,54 +50,75 @@ class TalentGoogleSheetsService {
         throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
       }
 
-      // Send data to Google Apps Script with proper CORS handling
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(sheetData)
-      };
-
-      console.log('Request options:', requestOptions);
-      console.log('🚀 Sending request to Google Apps Script...');
-
-      const response = await fetch(this.scriptUrl, requestOptions);
+      // Try the request with different approaches for CORS handling (same as hire form)
+      let response;
+      
+      try {
+        // First attempt: CORS-friendly request with redirect follow
+        console.log('Attempting CORS-friendly request...');
+        response = await fetch(this.scriptUrl, {
+          redirect: "follow",
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(sheetData)
+        });
+      } catch (corsError) {
+        console.warn('Standard CORS request failed:', corsError);
+        
+        // Second attempt: Try with no-cors mode (will limit response access)
+        console.log('Attempting no-cors request...');
+        try {
+          response = await fetch(this.scriptUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sheetData),
+            mode: 'no-cors'
+          });
+          
+          // With no-cors, we can't read the response, so assume success if no error
+          if (response.type === 'opaque') {
+            console.log('No-cors request completed (response opaque)');
+            return {
+              success: true,
+              message: 'Talent application sent successfully (no-cors mode)',
+              method: 'no-cors'
+            };
+          }
+        } catch (noCorsError) {
+          console.error('No-cors request also failed:', noCorsError);
+          throw corsError; // Throw the original CORS error
+        }
+      }
 
       console.log('Talent response status:', response.status);
-      console.log('Talent response statusText:', response.statusText);
-      console.log('Talent response type:', response.type);
-
-      // Try to get response text first for better error debugging
-      const responseText = await response.text();
-      console.log('Raw response text:', responseText);
+      console.log('Talent response headers:', Object.fromEntries(response.headers.entries()));
 
       if (!response.ok) {
+        const responseText = await response.text();
         console.error('Talent response error details:', responseText);
-        throw new Error(`HTTP error! status: ${response.status}, statusText: ${response.statusText}, details: ${responseText}`);
+        throw new Error(`HTTP error! status: ${response.status}, details: ${responseText}`);
       }
 
-      // Parse JSON response
-      let result;
-      try {
-        result = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error('Failed to parse response as JSON:', parseError);
-        throw new Error(`Invalid JSON response: ${responseText}`);
-      }
-
+      const result = await response.json();
       console.log('Talent Google Apps Script response:', result);
 
-      if (result.success) {
+      if (result.status === "success") {
         console.log('✅ Talent application saved to Google Sheets successfully:', result);
         return {
           success: true,
-          message: 'Your talent application has been submitted successfully!',
+          message: result.message || 'Your talent application has been submitted successfully!',
           timestamp: result.timestamp,
-          applicantName: result.applicantName
+          applicantName: result.applicantName,
+          spreadsheetUrl: result.spreadsheetUrl,
+          rowNumber: result.rowNumber
         };
       } else {
-        throw new Error(result.error || 'Failed to save talent application');
+        console.error('Google Apps Script returned error:', result);
+        throw new Error(result.message || 'Failed to save talent application');
       }
 
     } catch (error) {
@@ -151,23 +173,22 @@ class TalentGoogleSheetsService {
 
     try {
       console.log('Testing connection to Talent Google Apps Script...');
-      console.log('Script URL:', this.scriptUrl);
       
-      // First try a simple GET request to see if the script is accessible
+      // First try a GET request to see if the script is accessible
       const getResponse = await fetch(this.scriptUrl, {
         method: 'GET',
-        mode: 'no-cors', // Use no-cors for testing
+        mode: 'cors',
         credentials: 'omit'
       });
 
       console.log('Talent GET test response status:', getResponse.status);
-      console.log('Talent GET test response type:', getResponse.type);
       
-      if (getResponse.type === 'opaque') {
-        console.log('✅ Script is accessible (opaque response received)');
+      if (getResponse.ok) {
+        const getResult = await getResponse.text();
+        console.log('Talent GET test response:', getResult);
       }
 
-      // Now test with actual talent form data using no-cors
+      // Now test with actual talent form data
       const testData = {
         firstName: 'Test',
         lastName: 'Developer',
@@ -193,8 +214,7 @@ class TalentGoogleSheetsService {
       console.error('Talent connection test failed:', error);
       return {
         success: false,
-        error: error.message,
-        suggestion: 'Check if your Google Apps Script is properly deployed with "Anyone" access'
+        error: error.message
       };
     }
   }

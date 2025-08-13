@@ -3,7 +3,8 @@
 
 class GoogleSheetsService {
   constructor() {
-    this.scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+    this.scriptUrl = import.meta.env.VITE_HIRE_WITH_US_SCRIPT_URL;//script.google.com/macros/s/AKfycbwQoopux9COimFOvBvmuGh_ExVqMMpQybB9DyqvDW3wmLGXlf4zwb_Y7NegYT-uzjZl/exec
+;
   }
 
   // Save HireWithUs form data to Google Sheets
@@ -39,16 +40,15 @@ class GoogleSheetsService {
       let response;
       
       try {
-        // First attempt: Standard CORS request
-        console.log('Attempting standard CORS request...');
+        // First attempt: CORS-friendly request with redirect follow
+        console.log('Attempting CORS-friendly request...');
         response = await fetch(this.scriptUrl, {
+          redirect: "follow",
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/plain;charset=utf-8',
           },
-          body: JSON.stringify(sheetData),
-          mode: 'cors',
-          credentials: 'omit'
+          body: JSON.stringify(sheetData)
         });
       } catch (corsError) {
         console.warn('Standard CORS request failed:', corsError);
@@ -92,15 +92,19 @@ class GoogleSheetsService {
       const result = await response.json();
       console.log('Google Apps Script response:', result);
 
-      if (result.success) {
+      if (result.status === "success") {
         console.log('✅ Data saved to Google Sheets successfully:', result);
         return {
           success: true,
-          message: 'Form data saved to Google Sheets',
-          timestamp: result.timestamp
+          message: result.message || 'Form data saved to Google Sheets',
+          timestamp: result.timestamp,
+          clientName: result.clientName,
+          spreadsheetUrl: result.spreadsheetUrl,
+          rowNumber: result.rowNumber
         };
       } else {
-        throw new Error(result.error || 'Failed to save data');
+        console.error('Google Apps Script returned error:', result);
+        throw new Error(result.message || 'Failed to save data');
       }
 
     } catch (error) {
