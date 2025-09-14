@@ -4,6 +4,7 @@ import ProcessSteps from '../components/sections/ProcessSteps';
 import RoleCards from '../components/sections/RoleCards';
 import { CheckCircleIcon, UserGroupIcon, ClockIcon, ShieldCheckIcon, CodeBracketIcon, DevicePhoneMobileIcon, GlobeAltIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import Button from '../components/common/Button';
+import ReviewsSection from "../components/sections/ReviewsSection";
 
 const Home = () => {
   const benefits = [
@@ -106,7 +107,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+      {/* Reviews Section */}
+      <div>
+      <ReviewsSection />
+    </div>
       {/* Benefits Section */}
       <section className="benefits-section">
         <div className="benefits-container">
