@@ -37,6 +37,33 @@ const Home = () => {
     { number: '48hrs', label: 'Average Match Time' },
     { number: '50+', label: 'Countries Served' }
   ];
+  {/*Talent Request Process Steps*/}
+  const processSteps = [
+    {
+      step: 1,
+      title: 'Submit Your Requirements',
+      description: 'Tell us about your project, timeline, budget, and the skills you need',
+      timeline: '5 minutes'
+    },
+    {
+      step: 2,
+      title: 'Review Profiles',
+      description: 'Review detailed profiles of matched candidates including portfolios and past work',
+      timeline: '1-2 days'
+    },
+    {
+      step: 3,
+      title: 'Interview & Select',
+      description: 'Interview your top candidates and select the best fit for your project',
+      timeline: '2-3 days'
+    },
+    {
+      step: 4,
+      title: 'Start Your Project',
+      description: 'Begin working with your selected talent with full support from our team',
+      timeline: 'Immediate'
+    }
+  ];
 
   const softwareServices = [
     {
@@ -105,7 +132,42 @@ const Home = () => {
       </section>
 
       {/* Process Section */}
-      
+      <section id="how-it-works" className="section-padding section-bg-gray">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">
+              How It Works
+            </h2>
+            <p className="section-description">
+              Our streamlined process gets you from project idea to working with talent in just days
+            </p>
+          </div>
+
+          <div className="process-container">
+            {processSteps.map((step, index) => (
+              <div key={index} className="process-step">
+                <div className="process-step-icon-container">
+                  <div className="process-step-icon">
+                    {step.step}
+                  </div>
+                  {index < processSteps.length - 1 && (
+                    <div className="process-step-line"></div>
+                  )}
+                </div>
+                <div className="process-step-content">
+                  <div className="process-step-header">
+                    <h3 className="process-step-title">{step.title}</h3>
+                    <span className="process-step-timeline">
+                      {step.timeline}
+                    </span>
+                  </div>
+                  <p className="process-step-description">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Roles Section */}
       <section className="benefits-section-reduced-top">
