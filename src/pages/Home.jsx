@@ -105,7 +105,7 @@ const Home = () => {
       </section>
 
       {/* Process Section */}
-      <ProcessSteps />
+      
 
       {/* Roles Section */}
       <section className="benefits-section-reduced-top">
