@@ -1129,15 +1129,22 @@
 
 @media (min-width: 1024px) {
   .benefits-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    max-width: 900px;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem;
+    max-width: 1200px;
+  }
+  
+  /* More specific selectors to override any conflicts */
+  .container .benefits-grid,
+  .benefits-container .benefits-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
 }
 
 @media (min-width: 1280px) {
   .benefits-grid {
-    gap: 3rem;
+    gap: 2.5rem;
+    max-width: 1400px;
   }
 }
 
@@ -3474,4 +3481,44 @@
   color: #6b7280;
   line-height: 1.6;
   font-size: 0.9375rem;
+}
+
+/* High priority rule to ensure 4-column benefits grid layout - placed at end for specificity */
+@media (min-width: 1024px) {
+  .benefits-grid,
+  div.benefits-grid,
+  section .benefits-grid,
+  .container .benefits-grid,
+  .benefits-container .benefits-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    display: grid !important;
+    width: 100% !important;
+  }
+  
+  /* Ensure the grid doesn't wrap by setting explicit column count */
+  .benefits-grid > * {
+    grid-column: span 1 !important;
+  }
+}
+
+/* Force 4-column layout on extra large screens */
+@media (min-width: 1280px) {
+  .benefits-grid,
+  div.benefits-grid,
+  section .benefits-grid,
+  .container .benefits-grid,
+  .benefits-container .benefits-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    max-width: 1400px !important;
+    width: 100% !important;
+  }
+}
+
+/* Additional safety rule for benefits grid - highest specificity */
+@media screen and (min-width: 1024px) {
+  .benefits-grid[class*="benefits-grid"] {
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-auto-rows: auto !important;
+    display: grid !important;
+  }
 }
