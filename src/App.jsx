@@ -9,6 +9,7 @@ import Solutions from './pages/Solutions';
 import HireWithUs from './pages/HireWithUs';
 import TalentApplication from './pages/TalentApplication';
 import AboutUs from './pages/AboutUs';
+import PricingPage from './pages/PricingPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/hire-with-us" element={<HireWithUs />} />
             <Route path="/talent-application" element={<TalentApplication />} />
             <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/pricing" element={<PricingPage />} />
           </Routes>
         </main>
         <Footer />

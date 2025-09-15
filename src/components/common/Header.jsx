@@ -13,7 +13,9 @@ const Header = () => {
     { name: 'Our Roles', href: '/our-roles' },
     { name: 'Solutions', href: '/solutions' },
     { name: 'Hire With Us', href: '/hire-with-us' },
-    { name: 'Apply as Talent', href: '/talent-application' }
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Apply as Talent', href: '/talent-application' },
+    
   ];
 
   const isActive = (path) => location.pathname === path;
