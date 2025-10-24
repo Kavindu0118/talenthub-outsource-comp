@@ -1,5 +1,4 @@
 import React from 'react';
-import ProjectRequestForm from '../components/forms/ProjectRequestForm';
 import { 
   CodeBracketIcon, 
   DevicePhoneMobileIcon, 
@@ -67,16 +66,7 @@ Best regards,`);
       title: 'Business Software',
       description: 'CRM systems, ERP solutions, and custom business process automation tools'
     },
-    {
-      icon: <CloudIcon style={{height: '2rem', width: '2rem'}} />,
-      title: 'Cloud Solutions',
-      description: 'AWS, Azure, and Google Cloud deployment, migration, and optimization services'
-    },
-    {
-      icon: <CogIcon style={{height: '2rem', width: '2rem'}} />,
-      title: 'API Development',
-      description: 'RESTful APIs, GraphQL endpoints, and third-party integrations'
-    }
+
   ];
 
   const features = [
@@ -94,6 +84,11 @@ Best regards,`);
       icon: <CogIcon style={{height: '2rem', width: '2rem'}} />,
       title: 'Ongoing Support',
       description: 'Post-launch maintenance, updates, and technical support included'
+    },
+    {
+      icon: <CloudIcon style={{height: '2rem', width: '2rem'}} />,
+      title: 'Scalable Architecture',
+      description: 'Solutions designed to grow with your business and handle increased demand'
     }
   ];
 
@@ -318,7 +313,7 @@ Best regards,`);
         </div>
       </section>
 
-      {/* Form Section */}
+      {/* CTA to Form Section */}
       <section id="get-quote" className="section-padding section-bg-gray">
         <div className="container">
           <div className="section-header">
@@ -330,7 +325,17 @@ Best regards,`);
             </p>
           </div>
 
-          <ProjectRequestForm />
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Button 
+              variant="primary" 
+              size="lg" 
+              className="btn-primary"
+              href="/project-request"
+              style={{ backgroundColor: '#3b82f6', color: 'white' }}
+            >
+              Start Project Request
+            </Button>
+          </div>
         </div>
       </section>
 
